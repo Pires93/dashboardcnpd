@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Legislacao extends Model
+class Contato extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = "legislacaos";
+    protected $table = "contatos";
     protected $primaryKey="id";
-    protected $fillable = ['titulo','imagen','descricao','anexo','estado'];
+    protected $fillable = ['nome','morada','email','telefone','assunto','duvida'];
 }
