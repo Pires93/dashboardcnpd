@@ -38,7 +38,10 @@ class PedidoInformacaoController extends Controller
         $pedidos->num_p=$pedidos->id ."_".date('Y');
         $pedidos->save();
 
-        return redirect('/pedidoInformacao')->with('message','Registo efetuado com sucesso!');
+        return response()->json([
+            "message" => "Sua mensagem foi enviada para o Central de Apoio da CNPD!"
+        ], 201);
+       // return redirect('/pedidoInformacao')->with('message','Registo efetuado com sucesso!');
     }
 
     public function show($id)

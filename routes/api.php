@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LegislacaoController;
+use App\Http\Controllers\PedidoInformacaoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,4 +23,4 @@ Route::put('legislacaos/{id}', [LegislacaoController::class,'update']);
 Route::delete('legislacaos/{id}', [LegislacaoController::class,'destroy']);
 
 //NOVOS CONTATOS DE SITE
-Route::post('contatos/create', [ContatoController::class,'create']);
+Route::post('contatos/store', [PedidoInformacaoController::class,'store']);
