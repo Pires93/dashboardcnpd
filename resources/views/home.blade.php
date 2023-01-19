@@ -2,7 +2,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" id="corpo">
 
 
     <!-- Content Row -->
@@ -210,7 +210,7 @@
 
             <!-- Color System -->
             <div class="row">
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-4 mb-4">
                     <div class="card bg-primary text-white shadow">
                         <div class="card-body">
                             Primary
@@ -317,4 +317,10 @@
     </div>
 
 </div>
+<style>
+#corpo{
+
+}
+
+</style>
 @endsection

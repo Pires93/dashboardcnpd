@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\GeolocalizacaoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 /*se App\Http\Controllers\LegislacaoController;*/
 use App\Http\Controllers\PedidoInformacaoController;
 use App\Http\Controllers\UserController;
-
-
+use App\Http\Controllers\VideovigilanciaController;
+use App\Models\Geolocalicao;
+use App\Models\Videovigilancia;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -36,6 +38,15 @@ Route::get('/pedidoInformacao/{id}', [PedidoInformacaoController::class, 'show']
 
 Route::resource("/users",UserController::class)->middleware('auth');
 Route::get('/users/create', [UserController::class, 'create'])->name('create');
+
+//CCTV ROUTES
+Route::resource("/videovigilancia",VideovigilanciaController::class)->middleware('auth');
+Route::get('/videovigilancia/{id}', [VideovigilanciaController::class, 'show'])->name('show')->middleware('auth');
+
+//GPS ROUTES
+Route::resource("/geolocalizacao",GeolocalizacaoController::class)->middleware('auth');
+Route::get('/geolocalizacao/{id}', [GeolocalizacaoController::class, 'show'])->name('show')->middleware('auth');
+
 
 
 

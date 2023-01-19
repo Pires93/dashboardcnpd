@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\GeolocalizacaoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LegislacaoController;
 use App\Http\Controllers\PedidoInformacaoController;
+use App\Http\Controllers\VideovigilanciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,7 @@ Route::delete('legislacaos/{id}', [LegislacaoController::class,'destroy']);
 
 //NOVOS CONTATOS DE SITE
 Route::post('contatos/store', [PedidoInformacaoController::class,'store']);
+
+
+Route::post('videovigilancia/create', [VideovigilanciaController::class,'create']);
+Route::post('geolocalizacao/create', [GeolocalizacaoController::class,'create']);
