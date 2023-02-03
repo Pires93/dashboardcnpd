@@ -6,6 +6,7 @@
 use App\Models\PedidoInformacao;
 use App\Models\Videovigilancia;
 use App\Models\Geolocalizacao;
+use App\Models\Interconexao;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
@@ -81,6 +82,19 @@ Breadcrumbs::for('Formulários GPS', function ($trail) {
 Breadcrumbs::for('Ver GPS', function (BreadcrumbTrail $trail, Geolocalizacao $pedido) {
     $trail->parent('Formulários GPS', route('geolocalizacao.index'));
     $trail->push("Formulário Geolocalização ID - ".$pedido->id, route('show', $pedido));
+});
+
+/******************************************INTERCONEXAO****************************************** */
+// LISTA TODOS INTERCONEXAO
+Breadcrumbs::for('Formulários Interconexão', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Formulários Interconexão', route('interconexao.index'));
+});
+
+//MOSTRAR id
+Breadcrumbs::for('Ver Interconexão', function (BreadcrumbTrail $trail, Interconexao $pedido) {
+    $trail->parent('Formulários Interconexão', route('interconexao.index'));
+    $trail->push("Formulário Interconexão ID - ".$pedido->id, route('show', $pedido));
 });
 
 

@@ -3,7 +3,7 @@
 
 @section('content')
 
-
+@if($pedido) 
     <!-- Breadcrumbs -->
     {{ Breadcrumbs::render('Ver CCTV', $pedido) }}
 
@@ -111,14 +111,18 @@
         <div class="col-md-9" id="descricao">{{ $pedido->local_transmissao_imagens }}</div>
         <div class="col-md-3" id="name"> <br>Zonas Abrangidas:</div>
         <div class="col-md-9" id="descricao">
-            @if ($pedido->tipo_cctv == 'Formulário geral de videovigilância')
-            <li>{{ $pedido->zonas_abrangidas }};</li>
-            @else
-                @foreach ($pedido->zonas_abrangidas as $zona)
-                    <li>{{ $zona }};</li>
-                @endforeach
+            @if($pedido->zonas_abrangidas!="")
+                @if ($pedido->tipo_cctv == 'Formulário geral de videovigilância')
+                {{ $pedido->zonas_abrangidas }}<b>|</b>
+                @else
+                    @foreach ($pedido->zonas_abrangidas as $zona)
+                        {{ $zona }} <b>|</b>
+                    @endforeach
+                @endif
             @endif
+
         </div>
+        <div class="col-md-12"><br></div>
         <div class="col-md-3" id="name"> Outras zonas abrangidas:</div>
         <div class="col-md-9" id="descricao">{{ $pedido->outraszonas_abrangidas }}<br></div>
         <div class="col-md-12"><br></div>
@@ -149,7 +153,7 @@
         <div class="col-md-9" id="descricao">
             @if ($pedido->forma_direito_acesso)
                 @foreach ($pedido->forma_direito_acesso as $forma)
-                    <li>{{ $forma }};</li>
+                    {{ $forma }},
                 @endforeach
             @endif
         </div>
@@ -164,6 +168,7 @@
         <div class="col-md-12"><br></div>
         <div class="col-md-3" id="name"> Medidas Físicas:</div>
         <div class="col-md-9" id="descricao">{{ $pedido->medidas_fisicas_seguranca }}<br></div>
+        <div class="col-md-12"><br></div>
         <div class="col-md-3" id="name"> Medidas Lógicas:</div>
         <div class="col-md-9" id="descricao">{{ $pedido->medidas_logicas_seguranca }}<br></div>
         <div class="col-md-12"><br></div>
@@ -178,8 +183,23 @@
         @endif
 
     </div>
+    @else  
+<!-- Breadcrumbs -->
+{{ Breadcrumbs::render('Formulários CCTV') }}
+<div class="col-md-12" id="notFound">
+    <br>
+    <p>ID não encontrado.</p>
+</div>
 
+@endif
     <style>
+         #notFound {
+            color: #ffffff;
+            border-style: ridge;
+            border-radius: 10px;
+            background-color: #990000;
+            text-align:center;
+        }
         #geral {
             font-size: 14px;
             background-color: #fff;

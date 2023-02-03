@@ -3,7 +3,7 @@
 use App\Http\Controllers\GeolocalizacaoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-/*se App\Http\Controllers\LegislacaoController;*/
+use App\Http\Controllers\InterconexaoController;
 use App\Http\Controllers\PedidoInformacaoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideovigilanciaController;
@@ -47,6 +47,9 @@ Route::get('/videovigilancia/{id}', [VideovigilanciaController::class, 'show'])-
 Route::resource("/geolocalizacao",GeolocalizacaoController::class)->middleware('auth');
 Route::get('/geolocalizacao/{id}', [GeolocalizacaoController::class, 'show'])->name('show')->middleware('auth');
 
+//INTERCONEXAO ROUTES
+Route::resource("/interconexao",InterconexaoController::class)->middleware('auth');
+Route::get('/interconexao/{id}', [InterconexaoController::class, 'show'])->name('show')->middleware('auth');
 
 
 

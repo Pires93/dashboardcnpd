@@ -28,6 +28,11 @@
             <i class="fas fa-car"></i>
             <span>GPS</span></a>
     </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ route('interconexao.index') }}">
+            <i class="fas fa-retweet"></i>
+            <span>INTERCONEXAO</span></a>
+    </li>
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('pedidoInformacao.index') }}">
             <i class="fas fa-fw fa-info"></i>

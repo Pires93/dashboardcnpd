@@ -1,11 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Lista CCTV')
+@section('title', 'Lista GPS')
 
 @section('content')
 
-
-    <!-- Breadcrumbs -->
-    {{ Breadcrumbs::render('Ver GPS', $pedido) }}
+ 
+@if($pedido) 
+<!-- Breadcrumbs -->
+{{ Breadcrumbs::render('Ver GPS', $pedido) }}
 
     <div class="row" id="geral">
         <div class="col-md-12" id="cabecalho">
@@ -107,23 +108,25 @@
         <div class="col-md-9" id="descricao">
             @if ($pedido->finalidade_tratamento)
                 @foreach ($pedido->finalidade_tratamento as $finalidades)
-                    <li>{{ $finalidades }};</li>
+                    {{ $finalidades }}<b> | </b>
                 @endforeach
             @endif
         </div>
+        <div class="col-md-12"><br></div>
         <div class="col-md-3" id="name"> <br>Categorias dos dados pessoais tratados:</div>
         <div class="col-md-9" id="descricao">
             @if ($pedido->categoria_dados)
                 @foreach ($pedido->categoria_dados as $categorias)
-                    <li>{{ $categorias }};</li>
+                    {{ $categorias }}<b> | </b>
                 @endforeach
             @endif
         </div>
+        <div class="col-md-12"><br></div>
         <div class="col-md-3" id="name"> <br>Outros dados pessoais tratados:</div>
         <div class="col-md-9" id="descricao">
             @if ($pedido->outros_dados)
                 @foreach ($pedido->outros_dados as $outrosdados)
-                    <li>{{ $outrosdados }};</li>
+                    {{ $outrosdados }}<b> | </b>
                 @endforeach
             @endif
         </div>
@@ -159,7 +162,7 @@
         <div class="col-md-9" id="descricao">
             @if ($pedido->forma_direito_acesso)
                 @foreach ($pedido->forma_direito_acesso as $forma)
-                    <li>{{ $forma }};</li>
+                    {{ $forma }},
                 @endforeach
             @endif
         </div>
@@ -174,6 +177,7 @@
         <div class="col-md-12"><br></div>
         <div class="col-md-3" id="name"> Medidas Físicas:</div>
         <div class="col-md-9" id="descricao">{{ $pedido->medidas_fisicas_seguranca }}<br></div>
+        <div class="col-md-12"><br></div>
         <div class="col-md-3" id="name"> Medidas Lógicas:</div>
         <div class="col-md-9" id="descricao">{{ $pedido->medidas_logicas_seguranca }}<br></div>
         <div class="col-md-12"><br></div>
@@ -188,8 +192,23 @@
         @endif
 
     </div>
+@else  
+<!-- Breadcrumbs -->
+{{ Breadcrumbs::render('Formulários GPS') }}
+<div class="col-md-12" id="notFound">
+    <br>
+    <p>ID não encontrado.</p>
+</div>
 
+@endif
     <style>
+       #notFound {
+            color: #ffffff;
+            border-style: ridge;
+            border-radius: 10px;
+            background-color: #990000;
+            text-align:center;
+        }
         #geral {
             font-size: 14px;
             background-color: #fff;
