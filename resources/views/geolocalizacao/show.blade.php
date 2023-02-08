@@ -8,10 +8,11 @@
 <!-- Breadcrumbs -->
 {{ Breadcrumbs::render('Ver GPS', $pedido) }}
 
-    <div class="row" id="geral">
+    <div class="row" id="geral">  
         <div class="col-md-12" id="cabecalho">
-            Notificação de Tratamento de Dados <b> - {{ $pedido->tipo_cctv }}</b>
+            Notificação de Tratamento de Dados <b> - Geolocalização</b>
         </div>
+    <div class="col-md-12" id="right"><b>Criado em:</b> {{ $pedido->created_at }}</div> 
         <div class="col-lg-4 mb-4">
             <div class="card-body">
                 Tipo Notificação : <input type="checkbox" checked disabled> {{ $pedido->tipo_notificacao }}
@@ -76,7 +77,7 @@
         <div class="col-md-3" id="name" style="text-align: right"> Concelho:</div>
         <div class="col-md-3" id="descricao">{{ $pedido->concelho_representante_instalacao }}<br></div>
         <div class="col-md-3" id="name"> Nome da Pessoa de Contacto:</div>
-        <div class="col-md-9" id="descricao">{{ $pedido->nom_pessoa_contato_representante_instalacao }}<br></div>
+        <div class="col-md-9" id="descricao">{{ $pedido->nome_pessoa_contato_representante_instalacao }}<br></div>
         <div class="col-md-3" id="name"> Email: </div>
         <div class="col-md-3" id="descricao">{{ $pedido->email_pessoa_representante_instalacao }}</div>
         <div class="col-md-3" id="name" style="text-align: right"> Telefone:</div>
@@ -233,7 +234,9 @@
         #nameCenter {
             text-align: center;
         }
-
+        #right {
+            text-align: right;
+        }
         #descricao {
             color: #061536;
             border-style: ridge;

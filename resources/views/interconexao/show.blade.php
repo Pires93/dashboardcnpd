@@ -7,7 +7,11 @@
       <!-- Breadcrumbs -->
     {{ Breadcrumbs::render('Ver Interconexão', $pedido) }}
 
-    <div class="row" id="geral">     
+    <div class="row" id="geral"> 
+    <div class="col-md-12" id="cabecalho">
+            Notificação de Tratamento de Dados <b> - Interconexão de Dados</b>
+        </div>
+    <div class="col-md-12" id="right"><b>Criado em:</b> {{ $pedido->created_at }}</div>    
         <div class="col-lg-4 mb-4">
             <div class="card-body">
                 Tipo Notificação : <input type="checkbox" checked disabled> {{ $pedido->tipo_notificacao }}
@@ -381,7 +385,10 @@
         #nameCenter {
             text-align: center;
         }
-
+        #right {
+            text-align: right;
+        }
+        
         #descricao {
             color: #061536;
             border-style: ridge;
