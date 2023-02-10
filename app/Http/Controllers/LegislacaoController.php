@@ -23,7 +23,7 @@ class LegislacaoController extends Controller
         $leis->titulo=$request->titulo;
         $leis->descricao=$request->descricao;
         $leis->estado=$request->estado;
-        $leis->created_at=date('Y-m-d H:i:s');
+        $leis->created_at=date('d-m-Y H:i:s');
         $leis->save();
 
         return response()->json([
@@ -46,7 +46,7 @@ class LegislacaoController extends Controller
     {
         $leis = Legislacao::find($id);
         $editarDados=$request->all();
-        $leis->updated_at=date('Y-m-d H:i:s');
+        $leis->updated_at=date('d-m-Y H:i:s');
         $leis->update($editarDados);
 
         return response()->json([

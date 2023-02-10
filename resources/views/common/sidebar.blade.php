@@ -39,8 +39,13 @@
             <span>Pedido Informação</span></a>
     </li>
     <li class="nav-item active">
+        <a class="nav-link" href="{{ route('noticia.index') }}">
+            <i class="fas fa-fw fa-newspaper"></i>
+            <span>Notícias</span></a>
+    </li>
+    <li class="nav-item active">
         <a class="nav-link" href="/api/legislacaos">
-            <i class="fas fa-fw fa-info"></i>
+            <i class="fas fa-fw fa-gavel"></i>
             <span>Legislação</span></a>
     </li>
 

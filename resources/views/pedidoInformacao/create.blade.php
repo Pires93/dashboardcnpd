@@ -46,8 +46,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-fw fa-save"></i> Save
                                 </button>
-                            </div>
                         </form>
+
+                        </div>
                     </div>
                     <div class="col-lg-4 mb-4"></div>
                 </div>

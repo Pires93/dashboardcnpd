@@ -7,6 +7,7 @@ use App\Models\PedidoInformacao;
 use App\Models\Videovigilancia;
 use App\Models\Geolocalizacao;
 use App\Models\Interconexao;
+use App\Models\Noticia;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
@@ -96,6 +97,17 @@ Breadcrumbs::for('Ver Interconexão', function (BreadcrumbTrail $trail, Intercon
     $trail->parent('Formulários Interconexão', route('interconexao.index'));
     $trail->push("Formulário Interconexão ID - ".$pedido->id, route('show', $pedido));
 });
-
+/******************************************INTERCONEXAO****************************************** */
+// LISTA TODOS AS NOTICIAS
+Breadcrumbs::for('Notícias', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Notícias', route('noticia.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Ver Notícia', function (BreadcrumbTrail $trail, Noticia $news) {
+    $trail->parent('Notícias', route('noticia.index'));
+    $trail->push("Notícia ID - ".$news->id, route('show', $news));
+});
+ 
 
 ?>

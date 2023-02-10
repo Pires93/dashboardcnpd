@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('finalidadetratamentos', function (Blueprint $table) {
             $table->id();
             $table->integer('idForm')->nullable();
-            $table->string('categorias_finalidade')->nullable();
-            $table->string('finalidades')->nullable();
+            $table->json('categorias_finalidade')->nullable();
+            $table->json('finalidades')->nullable();
             $table->timestamps();
         });
     }

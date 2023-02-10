@@ -6,9 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterconexaoController;
 use App\Http\Controllers\PedidoInformacaoController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VideovigilanciaController;
-use App\Models\Geolocalicao;
-use App\Models\Videovigilancia;
+use App\Http\Controllers\VideovigilanciaController; 
+use App\Http\Controllers\NoticiaController; 
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -50,6 +49,14 @@ Route::get('/geolocalizacao/{id}', [GeolocalizacaoController::class, 'show'])->n
 //INTERCONEXAO ROUTES
 Route::resource("/interconexao",InterconexaoController::class)->middleware('auth');
 Route::get('/interconexao/{id}', [InterconexaoController::class, 'show'])->name('show')->middleware('auth');
+
+//NOTICIA ROUTES 
+Route::resource("/noticia",NoticiaController::class)->middleware('auth');
+Route::get('/noticia/create', [NoticiaController::class, 'create'])->name('create');
+Route::post('/noticia', [NoticiaController::class, 'store'])->name('index')->middleware('auth');
+Route::get('/delete/{id}', [NoticiaController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/unpublish/{id}', [NoticiaController::class, 'unpublish'])->name('index')->middleware('auth');
+ 
 
 
 
