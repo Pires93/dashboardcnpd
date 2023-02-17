@@ -34,8 +34,7 @@
         <div class="row row-cols-3">
             <div class="col">
                 <div class="card h-100">
-                <img src="/capanoticia/{{$news->imagem}}"  alt="{{ $news->imagem }}" class="card-img-top" />
-                </div>
+                <img src="{{ url("storage/capanoticia/{$news->imagem}")}}"   alt="{{ $news->imagem }}" class="card-img-top" /> </div>
             </div>
             <div class="col">
                 <p><b>Nº: </b>{{ $news->id }}</p>

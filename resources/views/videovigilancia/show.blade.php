@@ -178,11 +178,32 @@
         </div>
         <div class="col-md-12"><br></div>
         @if ($pedido->parecer_representante_trabalhadores)
-            <a href=""> Anexo do Representante dos Trabalhadores.</a>
+            <a href="" data-toggle="modal" data-target="#reptrab"> Ver Anexo Representante Trabalhadores</a>
         @elseif (!$pedido->parecer_representante_trabalhadores)
             <p>Não existe representante dos Trabalhadores.</p>
         @endif
-
+ 
+                <div id="reptrab" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="my-modal-title">Ver Anexo Representante Trabalhadores</h5>
+                                <button class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                             <div class="row row-cols-1">
+                             <embed
+                                    class="borda"
+                                    src="{{ url("storage/representanteTrab/{$pedido->parecer_representante_trabalhadores}")}}"
+                                    width="100%"
+                                    height="800px"
+                                />
+                             </div>                            
+                        </div>
+                    </div>
+                </div>
     </div>
     @else  
 <!-- Breadcrumbs -->

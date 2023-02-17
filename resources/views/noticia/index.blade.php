@@ -64,13 +64,13 @@
                                     </div> 
                                     <div class="col"> 
                                         <label>Foto de Capa</label>
-                                        <input type="file" id="capa" placeholder="Capa de Notícia" name="capa" class="form-control" required="">
+                                        <input accept="image/png, image/gif, image/jpeg" type="file" id="capa" placeholder="Capa de Notícia" name="capa" class="form-control" required="">
                                         <div class="va id-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
                                     </div>
                                     <div class="col"> 
                                         <label>Anexo</label>
-                                        <input type="file" id="anexo" placeholder="Anexo de Notícia" name="anexo" class="form-control">
+                                        <input  accept="application/pdf" type="file" id="anexo" placeholder="Anexo de Notícia" name="anexo" class="form-control">
                                         <div class="va id-feedback"></div> 
                                      </div> 
                                 </div>  
