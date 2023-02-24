@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comunicacaoterceiros extends Model
+class Comunicacaoterceiro extends Model
 {
     public $timestamps = false;
     protected $table = "comunicacaoterceiros";

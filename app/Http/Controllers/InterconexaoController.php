@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finalidadetratamento;
-use App\Models\Comunicacaoterceiros;
+use App\Models\Comunicacaoterceiro;
 use App\Models\Transferenciainternacional; 
 use App\Models\Interconexao;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class InterconexaoController extends Controller
     public function create(Request $request)
     {
         $pedidos = new Interconexao();
-        $pedidos->created_at = date('d-m-Y H:i:s');
+        $pedidos->created_at = date('Y-m-d H:i:s');
         $pedidos->tipo_notificacao = $request->tipo_notificacao;
         $pedidos->tipo_pessoa = $request->tipo_pessoa;
         $pedidos->nome_denominacao = $request->nome_denominacao;
@@ -156,7 +156,7 @@ class InterconexaoController extends Controller
                     $finalidade = new Finalidadetratamento();
                     $finalidade->categorias_finalidade = $dataF['categoria'];
                     $finalidade->idForm = $pedidos->id;
-                    $finalidade->created_at = date('d-m-Y | H:i:s');
+                    $finalidade->created_at = date('Y-m-d H:i:s');
 
                     $finalidade->finalidades = $dataF['finalidade'];
                 }
@@ -169,15 +169,15 @@ class InterconexaoController extends Controller
             foreach ($comunicacao_terceiros as $dataC) {
                 $count = count( $comunicacao_terceiros);
                 for ($i = 0; $i < $count; $i++) {
-                    $comunicacao = new Comunicacaoterceiros();
+                    $comunicacao = new Comunicacaoterceiro();
                     $comunicacao->entidades_comunicadas = $dataC['entidadesComunicadas'];
                     $comunicacao->condicoes_comunicacao = $dataC['condicoesComunicacao'];
                     $comunicacao->idForm = $pedidos->id;
-                    $comunicacao->created_at = date('d-m-Y | H:i:s');
+                    $comunicacao->created_at = date('Y-m-d H:i:s');
             }
                 $comunicacao->save();
             }  
-       }  
+       } 
         //DADOS DE TRANSFERENCIAS INTERNACIONAIS
       if($request->array_transferencia_internacional){
             $transfInternacional = $request->array_transferencia_internacional; 
@@ -190,7 +190,7 @@ class InterconexaoController extends Controller
                     $transferencia->dados_transferidos = $dataC['dadosTransferidos'];
                     $transferencia->fundamento = "" ;
                     $transferencia->idForm = $pedidos->id;
-                    $transferencia->created_at = date('d-m-Y | H:i:s');
+                    $transferencia->created_at = date('Y-m-d H:i:s');
             }
                 $transferencia->save();
             }
@@ -211,7 +211,7 @@ class InterconexaoController extends Controller
         //Transferenciainternacional; 
         $pedido = Interconexao::find($id);
         $finalidades = Finalidadetratamento::where('idForm',$id)->get();
-        $comunicacao = Comunicacaoterceiros::where('idForm',$id)->get();
+        $comunicacao = Comunicacaoterceiro::where('idForm',$id)->get();
         $transferencia = Transferenciainternacional::where('idForm',$id)->get();
         return view('interconexao.show')
         ->with('pedido',$pedido)

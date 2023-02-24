@@ -65,13 +65,11 @@ class GeolocalizacaoController extends Controller
         $pedidos->medidas_logicas_seguranca=$request->medidas_logicas_seguranca; 
         if($request->parecer_representante_trabalhadores) { 
             $nameBd=now().'.'.$request->parecer_representante_trabalhadores->extension(); 
-          $capaname = $request->parecer_representante_trabalhadores->storeAs('representanteTrab',$nameBd);//renomear noime da imagem na pasta 
+          $capaname = $request->parecer_representante_trabalhadores->storeAs('parecerTrabalhadores',$nameBd);//renomear noime da imagem na pasta 
           $pedidos->parecer_representante_trabalhadores=$nameBd;
-        }   
-
-
+        }    
         $pedidos->estado="Novo";
-        $pedidos->created_at=date('d-m-Y H:i:s');
+        $pedidos->created_at=date('Y-m-d H:i:s');
         $pedidos->save();
 
       return response()->json(["message" => "Dados submetidos com sucesso!"]);

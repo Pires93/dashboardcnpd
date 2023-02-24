@@ -4,6 +4,7 @@
 @section('content')
 
 
+@if($pedido)
 
     <!-- Breadcrumbs -->
     {{ Breadcrumbs::render('Ver Pedido', $pedido) }}
@@ -56,6 +57,18 @@
             </div>
         </div>
     </div>
+
+
+@else
+<!-- Breadcrumbs -->
+
+{{ Breadcrumbs::render('Pedidos Informação') }}
+<div class="col-md-12" id="notFound">
+    <br>
+    <p>ID não encontrado.</p>
+</div>
+
+@endif
     <style>
         #geral {
             font-family: "Times New Roman", Times, serif;
@@ -66,6 +79,13 @@
             margin-bottom: 10px;
             margin-right: 20px;
             text-align: right;
+        }
+        #notFound {
+            color: #ffffff;
+            border-style: ridge;
+            border-radius: 10px;
+            background-color: #990000;
+            text-align:center;
         }
     </style>
 @endsection

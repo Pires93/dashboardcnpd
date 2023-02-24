@@ -11,5 +11,5 @@ class Legislacao extends Model
     public $timestamps = false;
     protected $table = "legislacaos";
     protected $primaryKey="id";
-    protected $fillable = ['titulo','imagen','descricao','anexo','estado'];
+    protected $fillable = ['titulo','descricao','anexo','estado'];
 }

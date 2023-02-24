@@ -18,7 +18,9 @@ return new class extends Migration
             $table->integer('idForm')->nullable();
             $table->json('categorias_finalidade')->nullable();
             $table->json('finalidades')->nullable();
-            $table->timestamps();
+            
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

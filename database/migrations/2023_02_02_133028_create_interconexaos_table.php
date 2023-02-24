@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('interconexaos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->string('tipo_notificacao')->nullable();
             $table->string('tipo_pessoa')->nullable();
             $table->string('nome_denominacao')->nullable();
@@ -45,9 +46,7 @@ return new class extends Migration
             $table->string('caixapostal_processamento_informacao')->nullable();
             $table->string('local_processamento_informacao')->nullable();
             $table->string('ilha_processamento_informacao')->nullable();
-            $table->string('concelho_processamento_informacao')->nullable();
-
-
+            $table->string('concelho_processamento_informacao')->nullable(); 
             $table->string('tipo_pessoaSR')->nullable();
             $table->string('nome_denominacaoSR')->nullable();
             $table->string('nome_comercialSR')->nullable();
@@ -78,11 +77,11 @@ return new class extends Migration
             $table->string('ilha_processamento_informacaoSR')->nullable();
             $table->string('concelho_processamento_informacaoSR')->nullable();
             $table->string('descricao_forma_interconexao')->nullable();
-            $table->string('outraFinalidadeTratamento')->nullable();
+            $table->text('outraFinalidadeTratamento')->nullable();
             $table->json('dados_pessoais_tratado')->nullable(); 
-            $table->string('outros_dados_art8e11')->nullable();
-            $table->string('listadados_pessoais_tratados')->nullable(); 
-            $table->string('prazo_conservacao_dados')->nullable(); 
+            $table->text('outros_dados_art8e11')->nullable();
+            $table->text('listadados_pessoais_tratados')->nullable(); 
+            $table->text('prazo_conservacao_dados')->nullable(); 
             $table->string('rua_direito_acesso')->nullable();
             $table->string('caixapostal_direito_acesso')->nullable();
             $table->string('local_direito_acesso')->nullable();
@@ -91,9 +90,9 @@ return new class extends Migration
             $table->string('email_direito_acesso')->nullable();
             $table->integer('contato_direito_acesso')->nullable();
             $table->string('forma_direito_acesso')->nullable();
-            $table->string('outraforma_direito_acesso')->nullable();
-            $table->string('medidas_fisicas_seguranca')->nullable();
-            $table->string('medidas_logicas_seguranca')->nullable();
+            $table->text('outraforma_direito_acesso')->nullable();
+            $table->text('medidas_fisicas_seguranca')->nullable();
+            $table->text('medidas_logicas_seguranca')->nullable();
 
         });
     }

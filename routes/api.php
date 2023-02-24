@@ -10,17 +10,34 @@ use App\Http\Controllers\LegislacaoController;
 use App\Http\Controllers\PedidoInformacaoController;
 use App\Http\Controllers\VideovigilanciaController;
 use App\Http\Controllers\QueixaController;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-*/
+use App\Http\Controllers\PublicacoesController;
+use App\Http\Controllers\VideoController; 
+ 
 //API PARA ALIMENTAR SITE
-Route::get('legislacaos', [LegislacaoController::class,'index']);
+
+//LEGISLACAO
+Route::get('legislacao', [LegislacaoController::class,'ListarLegislacao']);
+Route::get('/legislacao/{id}', [LegislacaoController::class, 'ListarIdLegislacao']);
+
+//PUBLICACOES
+Route::get('isencoes', [PublicacoesController::class,'ListarIsencoes']);
+Route::get('/isencoes/{id}', [PublicacoesController::class, 'IsencaoId']);
+Route::get('deliberacoes', [PublicacoesController::class, 'ListarDeliberacao']);
+Route::get('/deliberacao/{id}', [PublicacoesController::class, 'IsencaoId']);
+Route::get('diretivas', [PublicacoesController::class, 'ListarDiretivas']);
+Route::get('/diretiva/{id}', [PublicacoesController::class, 'IsencaoId']);
+Route::get('planos', [PublicacoesController::class, 'ListarPlanos']);
+Route::get('/plano/{id}', [PublicacoesController::class, 'IsencaoId']);
+Route::get('relatorios', [PublicacoesController::class, 'ListarRelatorios']);
+Route::get('/relatorio/{id}', [PublicacoesController::class, 'IsencaoId']);
+Route::get('comunicados', [PublicacoesController::class, 'ListarComunicados']);
+Route::get('/comunicado/{id}', [PublicacoesController::class, 'IsencaoId']);
+Route::get('panfletos', [PublicacoesController::class, 'ListarPanfletos']);
+Route::get('/panfleto/{id}', [PublicacoesController::class, 'IsencaoId']);
+Route::get('videos', [VideoController::class, 'ListarVideos']); 
+
+
+
 //NOTICIAS
 Route::get('listarNoticias', [NoticiaController::class,'ListarTodasApi']);
 Route::get('/noticia/{id}', [NoticiaController::class, 'listarApiId']);

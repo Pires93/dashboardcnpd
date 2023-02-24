@@ -1,11 +1,11 @@
 @extends('layouts.master')
-@section('title', 'Lista Notícias')
+@section('title', 'CNPD Videos')
 
 @section('content')
 
-@if($news) 
+@if($vide) 
       <!-- Breadcrumbs -->
-    {{ Breadcrumbs::render('Ver Notícia', $news) }}
+    {{ Breadcrumbs::render('Ver Video', $vide) }}
      <!-- ALERT-->
      @if(session('message')) 
         <div class="alert alert-success" role="alert">
@@ -19,7 +19,7 @@
         <i class="fas fa-fw fa-edit"></i> Editar 
         </button>
         
-        @if($news->estado =='Publish')
+        @if($vide->estado =='Publish')
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#unpublish">
             <i class="fas fa-fw fa-download"></i> Despublicar
         </button> 
@@ -36,58 +36,46 @@
                 
     <div class="row" id="geral">  
         <div class="col-md-12" id="cabecalho">
-           <b>  {{ $news->titulo }}</b>
+           <b>  {{ $vide->titulo }}</b>
         </div> 
-        <div class="col-md-12"><br></div>
-        <div class="row row-cols-3">
-            <div class="col">
-                <div class="card h-100">
-                <a href="" data-toggle="modal" data-target="#vercapa">
-                <img src="{{ url("storage/capanoticia/{$news->imagem}")}}"   alt="{{ $news->imagem }}" class="card-img-top" /> </div>
-                </a>
-            </div>
-            <div class="col">
-                <p><b>Nº: </b>{{ $news->id }}</p>
-                <p><b>Título: </b>{{ $news->titulo }}</p>
-                <p><b>Subtítulo: </b>{{ $news->subtitulo }}</p>
-                <p><b>Autor: </b>{{ $news->autor }}</p>
-                <p><b>Tipo notícia: </b>{{ $news->type }}</p>
-                <p><b>Data de news: </b>{{ $news->created_at }}</p>
-                <p><b>Anexo: </b>{{ $news->anexo }}</p> 
-                <p><b>Estado: </b>{{ $news->estado }}</p>
-            </div> 
-        </div> 
-        <div class="col-md-12"><br></div>
-        <div class="col-md-12">
-        <p><b>Descrição:<br><br> </b>{{ $news->conteudo }}</p>  
-        </div>
+        <div class="col-md-12"><br></div> 
+        @if($vide->type=="Youtube")
+        <iframe allow="fullscreen;" width="100%" height="550" 
+        src="https://www.youtube.com/embed/{{$vide->link}}?autoplay=0&mute=0">
+        </iframe>  
+        @else
+        <video width="100%" controls controls
+              :poster="'{{ url("storage/publicacoesPdf/")}}'+ $vide.capa " >
+            <source src="{{ $vide->link}}" type="video/mp4"> 
+        </video> 
+        @endif 
       
     </div>
     <div id="apagar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="my-modal-title">Apagar notícia</h5>
+                        <h5 class="modal-title" id="my-modal-title">Apagar video</h5>
                         <button class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="was-validated"  method="post" action="/noticia" >
+                        <form class="was-validated"  method="post" action="/video" >
                             @csrf
                             <div class="row row-cols-1">
                             <div class="col" id="col"> 
                                     Deseja realmente apagar esse item?
                                 <br>
-                                    <p>Título: {{ $news->titulo}}</p>
-                                    <p>Data Criado: {{ $news->created_at}}</p>
+                                    <p>Título: {{ $vide->titulo}}</p>
+                                    <p>Data Criado: {{ $vide->created_at}}</p>
                                 </div>  
                             </div>  
                             
                             <hr>
                             
                             <div id="modal-footer">
-                            <a href="/deleten/{{ $news->id}}"
+                            <a href="/deleten/{{ $vide->id}}"
                                 class="btn btn-danger"> <i class="fas fa-trash"> Delete</i>
                             </a>  
                             </div>
@@ -100,27 +88,27 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title">Despublicar notícia</h5>
+                    <h5 class="modal-title" id="my-modal-title">Despublicar video</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form class="was-validated"  method="post" action="/noticia">
+                <form class="was-validated"  method="post" action="/video">
                     @csrf
                     <div class="row row-cols-1">
                         <div class="col" id="col"> 
-                                Deseja realmente despublicar essa notícia do Site?
+                                Deseja realmente despublicar essa video do Site?
                         <br>
-                                <p>Título: {{ $news->titulo}}</p>
-                                <p>Publicado em: {{ $news->created_at}}</p>
+                                <p>Título: {{ $vide->titulo}}</p>
+                                <p>Publicado em: {{ $vide->created_at}}</p>
                         </div>  
                     </div>  
                         
                     <hr>
                     
                     <div id="modal-footer">
-                    <a href="/unpublishn/{{ $news->id}}"
+                    <a href="/unpublishv/{{ $vide->id}}"
                         class="btn btn-info"> <i class="fas fa-download"> Unpublish</i>
                     </a>  
                     </div>
@@ -136,26 +124,26 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title">Publicar notícia</h5>
+                    <h5 class="modal-title" id="my-modal-title">Publicar video</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form class="was-validated"  method="post" action="/noticia">
+                <form class="was-validated"  method="post" action="/video">
                     @csrf
                     <div class="row row-cols-1">
                         <div class="col" id="col"> 
-                                Deseja realmente publicar essa notícia do Site?
+                                Deseja realmente publicar essa video do Site?
                         <br>
-                                <p>Título: {{ $news->titulo}}</p> 
+                                <p>Título: {{ $vide->titulo}}</p> 
                         </div>  
                     </div>  
                         
                     <hr>
                     
                     <div id="modal-footer">
-                    <a href="/publishn/{{ $news->id}}"
+                    <a href="/publishv/{{ $vide->id}}"
                         class="btn btn-info"> <i class="fas fa-download"> Publish</i>
                     </a>  
                     </div>
@@ -171,73 +159,58 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="edit-title">Editar notícia</h5>
+                    <h5 class="modal-title" id="edit-title">Editar Video</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form class="was-validated"  method="post" action="{{ url('/noticia/'.$news->id)}}" enctype="multipart/form-data">
+                <form class="was-validated"  method="post" action="{{ url('/video/'.$vide->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH') 
                 
                     <div class="row row-cols-1">
                         <div class="col"> 
-                            <input type="text" value="{{ $news->titulo }}" id="titulo" placeholder="Entre o título da notícia" name="titulo" class="form-control" required="">
+                        <label>Título</label>
+                            <input type="text" value="{{ $vide->titulo }}" id="titulo" placeholder="Entre o título do video" name="titulo" class="form-control" required="">
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">Campo obrigatório.</div>
                         </div>  
                     </div>  
-                    <div class="row row-cols-2">
+                    <div class="row row-cols-1"> 
+                         <div class="col"> 
+                            <label>Link</label>
+                            <input type="text" value="{{ $vide->link }}" id="link" placeholder="Introduza o link do video" name="link" class="form-control" >
+                            <div class="valid-feedback"></div> 
+                        </div> 
                         <div class="col"> 
-                            <input type="text" value="{{ $news->subtitulo }}" id="subtitulo" placeholder="Entre o subtitulo" name="subtitulo" class="form-control">
-                            <div class="valid-feedback"></div>
-                            <div class="invalid-feedback">Campo obrigatório.</div>
-                        </div>
-                        <div class="col"> 
-                            <input type="text" value="{{ $news->autor }}" id="autor" placeholder="Entre o autor" name="autor" class="form-control">
-                            <div class="valid-feedback"></div>
+                            <label>Thumbnail</label>
+                            <input accept="image/png, image/gif, image/jpeg" value="{{ $vide->capa }}" type="file" id="capa" placeholder="Capa do video" name="capa" class="form-control" required="">
+                            <div class="valid-feedback"></div> 
                             <div class="invalid-feedback">Campo obrigatório.</div>
                         </div> 
                         <div class="col"> 
-                            <label>Foto de Capa</label>
-                            <input type="file" value="{{ $news->capa }}" id="capa" placeholder="Capa de notícia" name="capa" class="form-control" required="">
-                            <div class="va id-feedback"></div>
-                            <div class="invalid-feedback">Campo obrigatório.</div>
-                        </div>
-                        <div class="col"> 
+                            <label>Tipo Video</label>
+                                <input disabled value="{{ $vide->type }}"  class="form-control" > 
+                            <div class="valid-feedback"></div>  
+                        </div>  
+                        <!--<div class="col"> 
                             <label>Anexo</label>
-                            <input type="file" value="{{ $news->anexo }}" id="anexo" placeholder="Anexo de notícia" name="anexo" class="form-control">
+                            <input type="file" value="{{ $vide->anexo }}" id="anexo" placeholder="Anexo de video" name="anexo" class="form-control">
                             <div class="va id-feedback"></div> 
-                            </div> 
+                        </div> -->
                     </div>  
-                    <div class="row row-cols-2">
-                        <div class="col"> 
-                        <label>Tipo notícia</label>
-                            <select name="type" value="{{ $news->type }}" id="type" class="form-control"  aria-label="Default select example" required="">
-                            <option value="Notícia">Notícia</option> 
-                        </select>
-                        <div class="valid-feedback"></div>
-                        <div class="invalid-feedback">Campo obrigatório.</div>
-                        </div>
+                    <div class="row row-cols-1"> 
                         <div class="col"> 
                         <label>Estado</label>
-                            <select name="estado" value="{{ $news->estado }}" id="estado" class="form-control"  aria-label="Default select example" required="">
+                            <select name="estado" value="{{ $vide->estado }}" id="estado" class="form-control"  aria-label="Default select example" required="">
                             <option value="Publish">Publicar no Site</option>
                             <option value="Unpublish">Não Publicar</option>  
                         </select>
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback">Campo obrigatório.</div>
                         </div>  
-                    </div>   
-                    <div class="row row-cols-1">
-                        <div class="col"> 
-                            <label>Descrição</label>
-                            <textarea value="{{ $news->conteudo }}" name="conteudo" class="form-control" rows="4" required=""></textarea>
-                            <div class="valid-feedback"></div>
-                            <div class="invalid-feedback">Campo obrigatório.</div>
-                        </div>  
-                    </div>
+                    </div>    
                     <hr>
                     <div id="modal-footer"> 
                         <button type="submit" class="btn btn-warning"> <i class="fas fa-fw fa-edit"></i> Editar</button>
@@ -249,33 +222,12 @@
                 </div>                            
             </div>
         </div>
-    </div> 
-    <div id="vercapa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title">{{ $news->titulo }}</h5>
-                    <button class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row row-cols-1">
-                    <embed
-                        class="borda"
-                        src="{{ url("storage/capanoticia/{$news->imagem}")}}"
-                        width="100%"
-                        height="400px"
-                    />
-                    </div>                            
-            </div>
-        </div>
-    </div>
+    </div>  
         
     @else  
 <!-- Breadcrumbs -->
 
-{{ Breadcrumbs::render('Notícias') }}
+{{ Breadcrumbs::render('Videos') }}
 <div class="col-md-12" id="notFound">
     <br>
     <p>ID não encontrado.</p>

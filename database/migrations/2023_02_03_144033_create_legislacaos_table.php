@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('legislacaos', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo')->nullable();
-            $table->string('imagen')->nullable();
+            $table->string('titulo')->nullable(); 
             $table->string('descricao')->nullable();
             $table->string('anexo')->nullable();
             $table->string('estado')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

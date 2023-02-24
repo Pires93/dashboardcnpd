@@ -28,12 +28,7 @@
                         </div>-->
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
-                    <a href="{{ url('/pedidoInformacao/create') }}" class="btn btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus"><span class="text">New</span></i>
-                        </span>
-                    </a>
+                <div class="card-body"> 
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

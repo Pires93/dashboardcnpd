@@ -5,7 +5,7 @@
 
 
      <!-- Breadcrumbs -->
-     {{ Breadcrumbs::render('Notícias') }}
+     {{ Breadcrumbs::render('Videos') }}
 
     <div class="row">
         <div class="col-md-12 col-md-12"> 
@@ -22,7 +22,7 @@
                 
 
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Notícias CNPD</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Videos CNPD</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -36,71 +36,66 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="my-modal-title">Publicar notícia</h5>
+                                <h5 class="modal-title" id="my-modal-title">Publicar video</h5>
                                 <button class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                            <form class="was-validated"  method="post" action="/noticia" enctype="multipart/form-data">
+                            <form class="was-validated"  method="post" action="/video" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row row-cols-1">
                                     <div class="col"> 
-                                        <input type="text" id="titulo" placeholder="Introduza o título da notícia" name="titulo" class="form-control" required="">
-                                        <div class="valid-feedback"></div>
-                                        <div class="invalid-feedback">Campo obrigatório.</div>
+                                        <input type="text" id="titulo" placeholder="Introduza o título do video" name="titulo" class="form-control" required="">
+                                        <div class="valid-feedback"></div> 
                                     </div>  
-                                </div>  
-                                <div class="row row-cols-2">
-                                    <div class="col"> 
-                                        <input type="text" id="subtitulo" placeholder="Introduza o subtítulo" name="subtitulo" class="form-control">
-                                        <div class="valid-feedback"></div>
-                                        <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>
-                                    <div class="col"> 
-                                        <input type="text" id="autor" placeholder="Introduza o autor" name="autor" class="form-control">
-                                        <div class="valid-feedback"></div>
-                                        <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div> 
-                                    <div class="col"> 
-                                        <label>Foto de Capa</label>
-                                        <input accept="image/png, image/gif, image/jpeg" type="file" id="capa" placeholder="Capa de notícia" name="capa" class="form-control" required="">
-                                        <div class="va id-feedback"></div>
-                                        <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>
-                                    <div class="col"> 
-                                        <label>Anexo</label>
-                                        <input  accept="application/pdf" type="file" id="anexo" placeholder="Anexo de notícia" name="anexo" class="form-control">
-                                        <div class="va id-feedback"></div> 
-                                     </div> 
-                                </div>  
-                                <div class="row row-cols-2">
-                                    <div class="col"> 
-                                    <label>Tipo notícia</label>
-                                     <select name="type" id="type" class="form-control"  aria-label="Default select example" required="">
-                                        <option value="Notícia">Notícia</option> 
-                                    </select>
-                                    <div class="valid-feedback"></div>
+                                </div> 
+                                <br>  
+                                <div class="row row-cols-1"> 
+                                <div class="col"> 
+                                    <label>Thumbnail</label>
+                                    <input accept="image/png, image/gif, image/jpeg" type="file" id="capa" placeholder="Capa do video" name="capa" class="form-control" required="">
+                                    <div class="valid-feedback"></div> 
                                     <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>
-                                    <div class="col"> 
-                                    <label>Estado</label>
-                                     <select name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
-                                        <option value="Publish">Publicar no site</option>
-                                        <option value="Unpublish">Não publicar</option> 
-                                    </select>
-                                    <div class="valid-feedback"></div>
-                                    <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>  
-                                </div>   
-                                <div class="row row-cols-1">
-                                    <div class="col"> 
-                                        <label>Descrição</label>
-                                        <textarea name="conteudo" class="form-control" rows="4" required=""></textarea>
+                                </div>  
+                                </div> 
+                                  
+                                <div class="row row-cols-1"> 
+                                    <div class="col">
+                                        <label>Tipo Video</label>
+                                        <select name="type" id="type" class="form-control"  aria-label="Default select example" required="">
+                                            <option value="Youtube">Link youtube</option>
+                                            <option value="Outro">Outro tipo link</option> 
+                                        </select>
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
+                                    </div>
+                                </div> 
+                                <div class="row row-cols-1"> 
+                                    <div class="col"> 
+                                        <label>Link</label>
+                                        <input type="text" id="link" placeholder="Introduza o link do video" name="link" class="form-control" required="" >
+                                        <div class="valid-feedback"></div> 
                                     </div>  
                                 </div>
+                               <!-- <div class="row row-cols-1"> 
+                                    <div class="col"> 
+                                        <label>Anexo</label>
+                                        <input  accept="application/mp4, application/mov" type="file" id="anexo" placeholder="Anexo de video" name="anexo" class="form-control">
+                                        <div class="va id-feedback"></div> 
+                                     </div> 
+                                </div> --> 
+                                <div class="row row-cols-1"> 
+                                    <div class="col"> 
+                                        <label>Estado</label>
+                                        <select name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
+                                            <option value="Publish">Publicar no site</option>
+                                            <option value="Unpublish">Não publicar</option> 
+                                        </select>
+                                        <div class="valid-feedback"></div>
+                                        <div class="invalid-feedback">Campo obrigatório.</div>
+                                    </div>  
+                                </div>    
                                 <hr>
                                 <div id="modal-footer"> 
                                     <button type="submit" class="btn btn-success"> <i class="fas fa-fw fa-save"></i> Submeter</button>
@@ -121,22 +116,22 @@
                                 <thead>
                                     <tr> 
                                         <th>Id</th>
-                                        <th>Título</th>
-                                        <th>Estado</th>
+                                        <th>Título</th> 
                                         <th>Data Criação</th>
+                                        <th>Estado</th> 
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($news)
-                                        @foreach ($news as $new)
+                                    @if ($vide)
+                                        @foreach ($vide as $vid)
                                             <tr> 
-                                                <td>{{ $new->id  }}</td>
-                                                <td>{{ $new->titulo  }}</td>
-                                                <td>{{ $new->estado  }}</td>
-                                                <td>{{ $new->created_at}}</td>
+                                                <td>{{ $vid->id  }}</td>
+                                                <td>{{ $vid->titulo  }}</td> 
+                                                <td>{{ $vid->created_at}}</td>
+                                                <td>{{ $vid->estado  }}</td> 
                                                 <td>
-                                                    <a href="{{ url('/noticia/' . $new->id) }}"
+                                                    <a href="{{ url('/video/' . $vid->id) }}"
                                                         class="btn btn-info btn-circle"> <i class="fas fa-eye"></i>
                                                     </a> 
                                                 </td> 

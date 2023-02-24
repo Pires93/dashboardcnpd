@@ -31,8 +31,7 @@ class NoticiaController extends Controller
         $news->autor=$request->autor;
         $news->conteudo=$request->conteudo;
         $news->type=$request->type;
-        $news->estado = $request->estado;
-        $news->created_at=date('d-m-Y H:i:s');
+        $news->estado = $request->estado; 
         $news->save();
 
         return redirect('/noticia')->with('message','Notícia publicada com sucesso!');
@@ -49,17 +48,17 @@ class NoticiaController extends Controller
  
     public function update(Request $request, $id)
     {
-        $pedido = Noticia::find($id);
+        $news = Noticia::find($id);
         $update=$request->all();
-        $pedido->updated_at=date('d-m-Y H:i:s');
+        $news->updated_at=date('Y-m-d H:i:s'); 
+        $news->conteudo=$request->conteudo;
         if($request->capa) {
             $capaname = $request->capa;
-            $nameBd=now().'.'.$request->capa->extension();
-          //$capaname = $request->capa->store('capanoticia');//salvar na pasta normal
+            $nameBd=now().'.'.$request->capa->extension(); 
           $capaname = $request->capa->storeAs('capanoticia',$nameBd);//renomear noime da imagem na pasta 
-          $pedido->imagem=$nameBd;
+          $news->imagem=$nameBd;
         }  
-        $pedido->update($update);
+        $news->update($update);
 
         return back()->with('message','Notícia editada com sucesso!');
     }
@@ -71,34 +70,41 @@ class NoticiaController extends Controller
         return redirect('/noticia')->with('message','Notícia apagada com sucesso!');
     }
     
-    public function unpublish($id)
+    public function unpublishn($id)
     {
         $news = Noticia::find($id);
         $news->estado="Unpublish";
         $news->save();
         return back()->with('message','Notícia despublicada com sucesso!');
     } 
-
+    public function publishn($id)
+    {
+        $news = Noticia::find($id);
+        $news->estado="Publish";
+        $news->save();
+        return back()->with('message','Notícia publicada com sucesso!');
+    } 
 
     //api para site
 
-    public function ListarTodasApi()
+    public function ListarTodasApi()//pegar todos os ids
     { 
-        return Noticia::all();
+        $state="Publish";
+        return Noticia::where('estado', $state)->orderBy('id', 'DESC')->get();
     }
-    public function listarUltimos3()
+    public function listarUltimos3()//pegar ultimos 3 ids
     { 
-        return Noticia::limit(3)->latest()->get();
+        return Noticia::limit(3)->latest()->orderBy('id', 'DESC')->get();
         return response($leis,200);
     }
 
-    public function ultimaNoticia()
+    public function ultimaNoticia() //pegar ultimo id
     { 
         return Noticia::latest()->get();
         return response($leis,200); 
     }
 
-    public function listarApiId($id)
+    public function listarApiId($id)//pegar um id
     {
         $leis = Noticia::find($id);
         return response($leis,200);

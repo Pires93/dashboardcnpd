@@ -19,14 +19,15 @@ return new class extends Migration
             $table->string('nome')->nullable();
             $table->string('morada')->nullable();
             $table->string('telefone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('assunto')->nullable();
-            $table->string('duvida')->nullable();
-            $table->string('data_p')->nullable();
-            $table->string('resposta')->nullable();
+            $table->string('email')->nullable(); 
+            $table->text('assunto')->nullable();
+            $table->text('duvida')->nullable(); 
+            $table->string('data_p')->nullable();  
+            $table->text('resposta')->nullable();
             $table->string('data_r')->nullable();
             $table->string('estado')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

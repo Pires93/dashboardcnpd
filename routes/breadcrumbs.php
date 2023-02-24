@@ -8,6 +8,9 @@ use App\Models\Videovigilancia;
 use App\Models\Geolocalizacao;
 use App\Models\Interconexao;
 use App\Models\Noticia;
+use App\Models\Legislacao;
+use App\Models\Publicacoes;
+use App\Models\Video;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
@@ -23,18 +26,11 @@ Breadcrumbs::for('Dashboard', function ($trail) {
 
 /************************************PEDIDO INFORMACAO****************************************** */
 
-// Home > PEDIDOS
+// Home > LISTAR
 Breadcrumbs::for('Pedidos Informação', function ($trail) {
     $trail->parent('Dashboard');
     $trail->push('Pedidos Informação', route('pedidoInformacao.index'));
-});
-
-//create
-Breadcrumbs::for('Novo Pedido', function ($trail) {
-    $trail->parent('Pedidos Informação', route('pedidoInformacao.index'));
-    $trail->push('Novo Pedido', route('create'));
-});
-
+}); 
 //show id
 Breadcrumbs::for('Ver Pedido', function (BreadcrumbTrail $trail, PedidoInformacao $pedido) {
     $trail->parent('Pedidos Informação', route('pedidoInformacao.index'));
@@ -72,7 +68,7 @@ Breadcrumbs::for('Ver CCTV', function (BreadcrumbTrail $trail, Videovigilancia $
     $trail->push("Formulário Videovigilância ID - ".$pedido->id, route('show', $pedido));
 });
 
-/******************************************CCTV****************************************** */
+/******************************************GPS****************************************** */
 // LISTA TODOS GPS
 Breadcrumbs::for('Formulários GPS', function ($trail) {
     $trail->parent('Dashboard');
@@ -97,7 +93,7 @@ Breadcrumbs::for('Ver Interconexão', function (BreadcrumbTrail $trail, Intercon
     $trail->parent('Formulários Interconexão', route('interconexao.index'));
     $trail->push("Formulário Interconexão ID - ".$pedido->id, route('show', $pedido));
 });
-/******************************************INTERCONEXAO****************************************** */
+/******************************************NOTICIAS****************************************** */
 // LISTA TODOS AS NOTICIAS
 Breadcrumbs::for('Notícias', function ($trail) {
     $trail->parent('Dashboard');
@@ -108,6 +104,38 @@ Breadcrumbs::for('Ver Notícia', function (BreadcrumbTrail $trail, Noticia $news
     $trail->parent('Notícias', route('noticia.index'));
     $trail->push("Notícia ID - ".$news->id, route('show', $news));
 });
- 
+ /******************************************LEGISLACAO****************************************** */
+// LISTA TODOS AS LEGISLACAO
+Breadcrumbs::for('Legislação', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Legislação', route('legislacao.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Lei ID', function (BreadcrumbTrail $trail, Legislacao $leis) {
+    $trail->parent('Legislação', route('legislacao.index'));
+    $trail->push("Legislação ID - ".$leis->id, route('show', $leis));
+});
 
+ /******************************************PUBLICACOES****************************************** */
+// LISTA TODOS AS PUBLICACOES
+Breadcrumbs::for('Publicações', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Publicações', route('publicacoes.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Publicação ID', function (BreadcrumbTrail $trail, Publicacoes $pubs) {
+    $trail->parent('Publicações', route('publicacoes.index'));
+    $trail->push("Publicação ID - ".$pubs->id, route('show', $pubs));
+});
+/******************************************VIDEOS****************************************** */
+// LISTA TODOS OS VIDEOS
+Breadcrumbs::for('Videos', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Videos', route('video.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Ver Video', function (BreadcrumbTrail $trail, Video $vide) {
+    $trail->parent('Videos', route('video.index'));
+    $trail->push("Video ID - ".$vide->id, route('show', $vide));
+});
 ?>

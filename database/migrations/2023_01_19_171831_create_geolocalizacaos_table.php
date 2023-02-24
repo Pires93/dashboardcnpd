@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('geolocalizacaos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+           
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->string('tipo_notificacao')->nullable();
             $table->string('tipo_pessoa')->nullable();
             $table->string('nome_denominacao')->nullable();
@@ -56,9 +58,9 @@ return new class extends Migration
             $table->string('email_direito_acesso')->nullable();
             $table->integer('contato_direito_acesso')->nullable();
             $table->string('forma_direito_acesso')->nullable();
-            $table->string('outraforma_direito_acesso')->nullable();
-            $table->string('medidas_fisicas_seguranca')->nullable();
-            $table->string('medidas_logicas_seguranca')->nullable();
+            $table->text('outraforma_direito_acesso')->nullable();
+            $table->text('medidas_fisicas_seguranca')->nullable();
+            $table->text('medidas_logicas_seguranca')->nullable();
             $table->string('parecer_representante_trabalhadores')->nullable();
             $table->string('estado')->nullable();
         });

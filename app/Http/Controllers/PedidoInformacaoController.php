@@ -31,13 +31,11 @@ class PedidoInformacaoController extends Controller
         $pedidos->telefone=$request->telefone;
         $pedidos->email=$request->email;
         $pedidos->assunto=$request->assunto;
-        $pedidos->duvida=$request->duvida;
-        $pedidos->data_p=date('d-m-Y H:i:s');
-        $pedidos->estado="Novo";
+        $pedidos->duvida=$request->duvida; 
+        $pedidos->estado="Novo";  
         $pedidos->save();
-        $pedidos->num_p=$pedidos->id ."_".date('Y');
+        $pedidos->num_p=$pedidos->id ."_".date('Y'); 
         $pedidos->save();
-
         return response()->json([
             "message" => "Sua mensagem foi enviada para o Central de Apoio da CNPD!"
         ], 201);
@@ -61,7 +59,7 @@ class PedidoInformacaoController extends Controller
     {
         $pedido = PedidoInformacao::find($id);
         $update=$request->all();
-        $pedido->data_r=date('d-m-Y H:i:s');
+        $pedido->data_r=date('Y-m-d H:i:s');
         $pedido->update($update);
 
         return redirect('pedidoInformacao')->with('flash_message','Pedido Updated!');

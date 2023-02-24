@@ -18,9 +18,10 @@ return new class extends Migration
             $table->integer('idForm')->nullable();
             $table->string('entidades')->nullable();
             $table->string('pais')->nullable();
-            $table->string('dados_transferidos')->nullable();
-            $table->string('fundamento')->nullable();
-            $table->timestamps();
+            $table->text('dados_transferidos')->nullable();
+            $table->text('fundamento')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
  

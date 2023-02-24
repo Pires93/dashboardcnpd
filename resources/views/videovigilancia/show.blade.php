@@ -196,7 +196,7 @@
                              <div class="row row-cols-1">
                              <embed
                                     class="borda"
-                                    src="{{ url("storage/representanteTrab/{$pedido->parecer_representante_trabalhadores}")}}"
+                                    src="{{ url("storage/parecerTrabalhadores/{$pedido->parecer_representante_trabalhadores}")}}"
                                     width="100%"
                                     height="800px"
                                 />

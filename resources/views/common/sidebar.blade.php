@@ -44,11 +44,20 @@
             <span>Notícias</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="/api/legislacaos">
+        <a class="nav-link" href="{{ route('legislacao.index') }}">
             <i class="fas fa-fw fa-gavel"></i>
             <span>Legislação</span></a>
     </li>
-
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('publicacoes.index') }}">
+            <i class="fas fa-fw fa-gavel"></i>
+            <span>Publicações</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('video.index') }}">
+            <i class="fas fa-fw fa-gavel"></i>
+            <span>Videos</span></a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 

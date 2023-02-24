@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('videovigilancias', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); 
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->string('finalidade_cctv')->nullable();
             $table->string('tipo_notificacao')->nullable();
             $table->string('tipo_cctv')->nullable();
@@ -49,9 +50,9 @@ return new class extends Migration
             $table->string('concelho_processamento_informacao')->nullable();
             $table->string('numero_camaras')->nullable();
             $table->json('zonas_abrangidas')->nullable();
-            $table->string('local_transmissao_imagens')->nullable();
-            $table->string('quem_tem_acesso_imagens')->nullable();
-            $table->string('outraszonas_abrangidas')->nullable();
+            $table->text('local_transmissao_imagens')->nullable();
+            $table->text('quem_tem_acesso_imagens')->nullable();
+            $table->text('outraszonas_abrangidas')->nullable();
             $table->string('rua_direito_acesso')->nullable();
             $table->string('caixapostal_direito_acesso')->nullable();
             $table->string('local_direito_acesso')->nullable();
@@ -60,9 +61,9 @@ return new class extends Migration
             $table->string('email_direito_acesso')->nullable();
             $table->integer('contato_direito_acesso')->nullable();
             $table->string('forma_direito_acesso')->nullable();
-            $table->string('outraforma_direito_acesso')->nullable();
-            $table->string('medidas_fisicas_seguranca')->nullable();
-            $table->string('medidas_logicas_seguranca')->nullable();
+            $table->text('outraforma_direito_acesso')->nullable();
+            $table->text('medidas_fisicas_seguranca')->nullable();
+            $table->text('medidas_logicas_seguranca')->nullable();
             $table->string('parecer_representante_trabalhadores')->nullable();
             $table->string('estado')->nullable();
 

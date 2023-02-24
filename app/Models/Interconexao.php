@@ -103,7 +103,7 @@ class Interconexao extends Model
         }
 
         public function comunicacao_terceiros(){
-            return $this->hasMany('App\Models\Comunicacaoterceiros');
+            return $this->hasMany('App\Models\Comunicacaoterceiro');
         }
 
 }

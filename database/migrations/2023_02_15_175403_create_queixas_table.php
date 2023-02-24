@@ -23,12 +23,13 @@ return new class extends Migration
             $table->string('entidade_queixa')->nullable();
             $table->string('morada_queixa')->nullable();
             $table->string('telefone_queixa')->nullable();
-            $table->string('email_queixa')->nullable();
-            $table->string('assunto_queixa')->nullable();
-            $table->string('descricao_queixa')->nullable();
+            $table->string('email_queixa')->nullable(); 
+            $table->text('assunto_queixa')->nullable();
+            $table->text('descricao_queixa')->nullable();
             $table->string('anexo_queixa')->nullable();
             $table->string('estado')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

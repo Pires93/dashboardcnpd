@@ -8,6 +8,10 @@ use App\Http\Controllers\PedidoInformacaoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideovigilanciaController; 
 use App\Http\Controllers\NoticiaController; 
+use App\Http\Controllers\LegislacaoController; 
+use App\Http\Controllers\PublicacoesController; 
+use App\Http\Controllers\VideoController; 
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -51,12 +55,36 @@ Route::resource("/interconexao",InterconexaoController::class)->middleware('auth
 Route::get('/interconexao/{id}', [InterconexaoController::class, 'show'])->name('show')->middleware('auth');
 
 //NOTICIA ROUTES 
-Route::resource("/noticia",NoticiaController::class)->middleware('auth');
-Route::get('/noticia/create', [NoticiaController::class, 'create'])->name('create');
+Route::resource("/noticia",NoticiaController::class)->middleware('auth'); 
 Route::post('/noticia', [NoticiaController::class, 'store'])->name('index')->middleware('auth');
-Route::get('/delete/{id}', [NoticiaController::class, 'destroy'])->name('index')->middleware('auth');
-Route::get('/unpublish/{id}', [NoticiaController::class, 'unpublish'])->name('index')->middleware('auth');
+Route::get('/deleten/{id}', [NoticiaController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/unpublishn/{id}', [NoticiaController::class, 'unpublishn'])->name('index')->middleware('auth');
+Route::get('/publishn/{id}', [NoticiaController::class, 'publishn'])->name('index')->middleware('auth');
  
+
+//LEGISLACAO ROUTES 
+Route::resource("/legislacao",LegislacaoController::class)->middleware('auth'); 
+Route::post('/legislacao', [LegislacaoController::class, 'store'])->name('index')->middleware('auth');
+Route::get('/deletel/{id}', [LegislacaoController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/unpublishl/{id}', [LegislacaoController::class, 'unpublishl'])->name('index')->middleware('auth');
+Route::get('/publishl/{id}', [LegislacaoController::class, 'publishl'])->name('index')->middleware('auth');
+ 
+
+//PUBLICACOES ROUTES 
+Route::resource("/publicacoes",PublicacoesController::class)->middleware('auth'); 
+Route::post('/publicacoes', [PublicacoesController::class, 'store'])->name('index')->middleware('auth');
+Route::get('/deletep/{id}', [PublicacoesController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/unpublishp/{id}', [PublicacoesController::class, 'unpublishp'])->name('index')->middleware('auth');
+Route::get('/publishp/{id}', [PublicacoesController::class, 'publishp'])->name('index')->middleware('auth');
+ 
+//VIDEO ROUTES 
+Route::resource("/video",VideoController::class)->middleware('auth'); 
+Route::post('/video', [VideoController::class, 'store'])->name('index')->middleware('auth');
+Route::get('/deleten/{id}', [VideoController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/unpublishv/{id}', [VideoController::class, 'unpublishv'])->name('index')->middleware('auth');
+Route::get('/publishv/{id}', [VideoController::class, 'publishv'])->name('index')->middleware('auth');
+ 
+
 
 
 

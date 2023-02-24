@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('comunicacaoterceiros', function (Blueprint $table) {
             $table->id();
             $table->integer('idForm')->nullable();
-            $table->string('entidades_comunicadas')->nullable();
-            $table->string('condicoes_comunicacao')->nullable();
-            $table->timestamps();
+            $table->text('entidades_comunicadas')->nullable();
+            $table->text('condicoes_comunicacao')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

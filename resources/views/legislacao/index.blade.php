@@ -5,7 +5,7 @@
 
 
      <!-- Breadcrumbs -->
-     {{ Breadcrumbs::render('Notícias') }}
+     {{ Breadcrumbs::render('Legislação') }}
 
     <div class="row">
         <div class="col-md-12 col-md-12"> 
@@ -22,67 +22,43 @@
                 
 
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Notícias CNPD</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Legislação CNPD</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                  <!-- Large modal -->
                 <div class="nova">
                     <button class="btn btn-success" type="button" data-toggle="modal" data-target="#my-modal">
-                    <i class="fas fa-fw fa-plus"></i> Adicionar 
+                    <i class="fas fa-fw fa-plus"></i> Novo 
                     </button>
                 </div>
                 <div id="my-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="my-modal-title">Publicar notícia</h5>
+                                <h5 class="modal-title" id="my-modal-title">Publicar nova Legislação</h5>
                                 <button class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                            <form class="was-validated"  method="post" action="/noticia" enctype="multipart/form-data">
+                            <form class="was-validated"  method="post" action="/legislacao" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row row-cols-1">
                                     <div class="col"> 
-                                        <input type="text" id="titulo" placeholder="Introduza o título da notícia" name="titulo" class="form-control" required="">
+                                        <input type="text" id="titulo" placeholder="Introduza o título da legislação" name="titulo" class="form-control" required="">
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
                                     </div>  
                                 </div>  
-                                <div class="row row-cols-2">
+                                <div class="row row-cols-1"> 
                                     <div class="col"> 
-                                        <input type="text" id="subtitulo" placeholder="Introduza o subtítulo" name="subtitulo" class="form-control">
-                                        <div class="valid-feedback"></div>
-                                        <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>
-                                    <div class="col"> 
-                                        <input type="text" id="autor" placeholder="Introduza o autor" name="autor" class="form-control">
-                                        <div class="valid-feedback"></div>
-                                        <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div> 
-                                    <div class="col"> 
-                                        <label>Foto de Capa</label>
-                                        <input accept="image/png, image/gif, image/jpeg" type="file" id="capa" placeholder="Capa de notícia" name="capa" class="form-control" required="">
-                                        <div class="va id-feedback"></div>
-                                        <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>
-                                    <div class="col"> 
-                                        <label>Anexo</label>
-                                        <input  accept="application/pdf" type="file" id="anexo" placeholder="Anexo de notícia" name="anexo" class="form-control">
+                                        <label>Anexo da legislação PDF</label>
+                                        <input  accept="application/pdf" type="file" id="anexo" placeholder="Anexo de legislação" name="anexo" class="form-control" required="">
                                         <div class="va id-feedback"></div> 
                                      </div> 
                                 </div>  
-                                <div class="row row-cols-2">
-                                    <div class="col"> 
-                                    <label>Tipo notícia</label>
-                                     <select name="type" id="type" class="form-control"  aria-label="Default select example" required="">
-                                        <option value="Notícia">Notícia</option> 
-                                    </select>
-                                    <div class="valid-feedback"></div>
-                                    <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>
+                                <div class="row row-cols-2"> 
                                     <div class="col"> 
                                     <label>Estado</label>
                                      <select name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
@@ -96,7 +72,7 @@
                                 <div class="row row-cols-1">
                                     <div class="col"> 
                                         <label>Descrição</label>
-                                        <textarea name="conteudo" class="form-control" rows="4" required=""></textarea>
+                                        <textarea name="descricao" class="form-control" rows="4" required=""></textarea>
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
                                     </div>  
@@ -122,21 +98,21 @@
                                     <tr> 
                                         <th>Id</th>
                                         <th>Título</th>
-                                        <th>Estado</th>
                                         <th>Data Criação</th>
+                                        <th>Estado</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($news)
-                                        @foreach ($news as $new)
+                                    @if ($leis)
+                                        @foreach ($leis as $lei)
                                             <tr> 
-                                                <td>{{ $new->id  }}</td>
-                                                <td>{{ $new->titulo  }}</td>
-                                                <td>{{ $new->estado  }}</td>
-                                                <td>{{ $new->created_at}}</td>
+                                                <td>{{ $lei->id  }}</td>
+                                                <td>{{ $lei->titulo  }}</td>
+                                                <td>{{ $lei->created_at}}</td>
+                                                <td>{{ $lei->estado}}</td>
                                                 <td>
-                                                    <a href="{{ url('/noticia/' . $new->id) }}"
+                                                    <a href="{{ url('/legislacao/' . $lei->id) }}"
                                                         class="btn btn-info btn-circle"> <i class="fas fa-eye"></i>
                                                     </a> 
                                                 </td> 
