@@ -40,7 +40,7 @@ class UserController extends Controller
     }*/
      public function create()
     {
-        return view('users.create');
+       // return view('users.create');
     }
 
 
@@ -50,7 +50,13 @@ class UserController extends Controller
         $user->name=$request->name;
         $user->email=$request->email;
         $user->typeUser=$request->typeUser;
+        $user->estado=$request->estado;
         $user->password=Hash::make($request->password);
+        if($request->foto) { 
+            $nameBd=now().'.'.$request->foto->extension(); 
+          $capaname = $request->foto->storeAs('users',$nameBd); 
+          $user->foto=$nameBd;
+        } 
         $user->save();
 
         return redirect('/users');
@@ -59,7 +65,8 @@ class UserController extends Controller
 
     public function show($id)
     {
-        //
+        $user = User::find($id); 
+        return view('users.profile')->with('user',$user);
     }
 
     public function edit($id)
@@ -69,13 +76,41 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $update=$request->all();
+        $user->updated_at=date('Y-m-d H:i:s'); 
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->estado=$request->estado;
+        $user->typeUser=$request->typeUser; 
+        if($request->foto) { 
+            $nameBd=now().'.'.$request->foto->extension(); 
+          $capaname = $request->foto->storeAs('users',$nameBd); 
+          $user->foto=$nameBd;
+        }   
+        $user->save();
+        return back()->with('message','User editado com sucesso!');
     }
 
-
+     
     public function destroy($id)
     {
-       User::destroy($id);
-       return redirect('/users');
+        User::destroy($id);  
+        return redirect('/users')->with('message','User removido com sucesso!');
     }
+
+    public function desativar($id)
+    {
+        $user = User::find($id);
+        $user->estado="Inativo";
+        $user->save();
+        return back()->with('message','User desativado com sucesso!');
+    } 
+    public function ativar($id)
+    {
+        $user = User::find($id);
+        $user->estado="Ativo";
+        $user->save();
+        return back()->with('message','User ativado com sucesso!');
+    } 
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Legislacao>
  */
-class LegislacaoFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,11 +17,8 @@ class LegislacaoFactory extends Factory
     public function definition()
     {
         return [
-            'titulo'=>$this->faker->sentence(), 
-            'descricao'=>$this->faker->text(),
-            'anexo'=>$this->faker->text(),
-            'estado'=>$this->faker->text(),
-
+            'title'=>$this->faker->text(), 
+            'body'=>$this->faker->text(),  
         ];
     }
 }

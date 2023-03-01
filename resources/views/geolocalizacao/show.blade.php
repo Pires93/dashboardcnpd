@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Lista GPS')
+@section('title', 'ID GPS')
 
 @section('content')
 
@@ -187,7 +187,7 @@
         </div>
         <div class="col-md-12"><br></div>
         @if ($pedido->parecer_representante_trabalhadores)
-        <a href="" data-toggle="modal" data-target="#reptrab"> Ver Anexo Representante Trabalhadores</a>
+        <a href="" class="col-md-12" data-toggle="modal" data-target="#reptrab"> Ver Anexo Representante Trabalhadores</a>
         @elseif (!$pedido->parecer_representante_trabalhadores)
             <p>Não existe representante dos Trabalhadores.</p>
         @endif
@@ -203,7 +203,6 @@
                             <div class="modal-body">
                              <div class="row row-cols-1"> 
                                  <embed
-                                    class="borda"
                                     src="{{ url("storage/parecerTrabalhadores/{$pedido->parecer_representante_trabalhadores}")}}"
                                     width="100%"
                                     height="800px"
@@ -212,7 +211,9 @@
                         </div>
                     </div>
                 </div>
+                
     </div>
+    
 @else  
 <!-- Breadcrumbs -->
 {{ Breadcrumbs::render('Formulários GPS') }}
@@ -261,6 +262,11 @@
             color: #061536;
             border-style: ridge;
         }
+        #reptrab{      
+        height:auto;
+        z-index: 10000000;
+        }
+         
 
     </style>
 

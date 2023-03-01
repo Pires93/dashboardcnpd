@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('telefone')->nullable();
             $table->string('email')->nullable(); 
             $table->text('assunto')->nullable();
-            $table->text('duvida')->nullable(); 
-            $table->string('data_p')->nullable();  
+            $table->text('duvida')->nullable();  
             $table->text('resposta')->nullable();
             $table->string('data_r')->nullable();
             $table->string('estado')->nullable();

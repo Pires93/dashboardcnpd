@@ -39,6 +39,7 @@ class VideoController extends Controller
           $vide->capa=$nameBd;
         }     
         $vide->estado=$request->estado;
+        $vide->created_at=date('Y-m-d H:i:s');
         $vide->save();  
        
         return redirect('/video')->with('message','Video publicado com sucesso!');
@@ -64,6 +65,8 @@ class VideoController extends Controller
         $vide->updated_at=date('Y-m-d H:i:s'); 
         $vide->titulo=$request->titulo;
         $vide->link=$request->link;
+        $vide->type=$request->type; 
+        $vide->estado=$request->estado;
        /* if($request->anexo) { 
             $nameBd=now().'.'.$request->anexo->extension(); 
           $capaname = $request->anexo->storeAs('videos',$nameBd);//renomear noime da imagem na pasta 
@@ -89,14 +92,14 @@ class VideoController extends Controller
     public function unpublishv($id)
     {
         $vide = Video::find($id);
-        $vide->estado="Unpublish";
+        $vide->estado="Despublicado";
         $vide->save();
         return back()->with('message','Video despublicado com sucesso!');
     } 
     public function publishv($id)
     {
         $vide = Video::find($id);
-        $vide->estado="Publish";
+        $vide->estado="Publicado";
         $vide->save();
         return back()->with('message','Video publicado com sucesso!');
     } 
@@ -106,7 +109,7 @@ class VideoController extends Controller
 
     public function ListarVideos()//pegar todos os ids
     { 
-        $state="Publish";
+        $state="Publicado";
         return Video::where('estado', $state)->orderBy('id', 'DESC')->get();
     } 
 }

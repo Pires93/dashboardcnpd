@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('legislacaos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo')->nullable(); 
-            $table->string('descricao')->nullable();
+            $table->string('descricao')->nullable(); 
             $table->string('anexo')->nullable();
             $table->string('estado')->nullable();
             $table->timestamp('created_at')->useCurrent();

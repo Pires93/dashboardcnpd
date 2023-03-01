@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Lista Interconexão')
+@section('title', 'Ver Interconexão')
 
 @section('content')
 

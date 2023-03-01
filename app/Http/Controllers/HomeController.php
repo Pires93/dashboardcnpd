@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     /**
@@ -23,9 +23,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $countA = DB::table('videovigilancias')->count();
+        $countB = DB::table('geolocalizacaos')->count();
+        $countC = DB::table('interconexaos')->count();
+        $countTotal = $countA + $countB + $countC; 
+ 
+        return view('home')->with('countTotal',$countTotal);
     }
 
+    
     public function login()
     {
         return view('home');

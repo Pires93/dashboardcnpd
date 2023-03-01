@@ -38,6 +38,8 @@ class QueixaController extends Controller
           $capaname = $request->anexo_queixa->storeAs('anexosQueixas',$nameBd);//renomear noime da imagem na pasta 
           $q->anexo_queixa=$nameBd;
         }    
+
+        $q->created_at=date('Y-m-d H:i:s');
         $q->estado="Novo";
         $q->save();
         $q->num_q=$q->id ."_".date('Y');

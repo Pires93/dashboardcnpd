@@ -11,20 +11,11 @@ use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\LegislacaoController; 
 use App\Http\Controllers\PublicacoesController; 
 use App\Http\Controllers\VideoController; 
+use App\Http\Controllers\SidebarController; 
 
 use Illuminate\Support\Facades\Auth;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+ 
 
 Route::get('/', [HomeController::class,'login'])->middleware('auth');
 Auth::routes();
@@ -40,7 +31,11 @@ Route::get('/pedidoInformacao/{id}', [PedidoInformacaoController::class, 'show']
 //USERS ROUTES
 
 Route::resource("/users",UserController::class)->middleware('auth');
-Route::get('/users/create', [UserController::class, 'create'])->name('create');
+Route::post('/users', [UserController::class, 'store'])->name('index')->middleware('auth');
+Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/desativar/{id}', [UserController::class, 'desativar'])->name('index')->middleware('auth');
+Route::get('/ativar/{id}', [UserController::class, 'ativar'])->name('index')->middleware('auth');
+ 
 
 //CCTV ROUTES
 Route::resource("/videovigilancia",VideovigilanciaController::class)->middleware('auth');
@@ -69,7 +64,7 @@ Route::get('/deletel/{id}', [LegislacaoController::class, 'destroy'])->name('ind
 Route::get('/unpublishl/{id}', [LegislacaoController::class, 'unpublishl'])->name('index')->middleware('auth');
 Route::get('/publishl/{id}', [LegislacaoController::class, 'publishl'])->name('index')->middleware('auth');
  
-
+ 
 //PUBLICACOES ROUTES 
 Route::resource("/publicacoes",PublicacoesController::class)->middleware('auth'); 
 Route::post('/publicacoes', [PublicacoesController::class, 'store'])->name('index')->middleware('auth');
@@ -84,6 +79,13 @@ Route::get('/deleten/{id}', [VideoController::class, 'destroy'])->name('index')-
 Route::get('/unpublishv/{id}', [VideoController::class, 'unpublishv'])->name('index')->middleware('auth');
 Route::get('/publishv/{id}', [VideoController::class, 'publishv'])->name('index')->middleware('auth');
  
+//SIDEBAR ROUTES 
+Route::resource("/sidebar",SidebarController::class)->middleware('auth'); 
+Route::post('/sidebar', [SidebarController::class, 'store'])->name('index')->middleware('auth');
+Route::get('/delete/{id}', [SidebarController::class, 'destroy'])->name('index')->middleware('auth'); 
+Route::get('/desabilitar/{id}', [SidebarController::class, 'desabilitar'])->name('index')->middleware('auth');
+Route::get('/habilitar/{id}', [SidebarController::class, 'habilitar'])->name('index')->middleware('auth');
+ 
 
 
 
@@ -95,9 +97,7 @@ Route::get('/publishv/{id}', [VideoController::class, 'publishv'])->name('index'
 
 
 
-
-
-
+ 
 
 
 Route::get('/users/{profile}',[UserController::class, 'profile'])->name('users.profile');

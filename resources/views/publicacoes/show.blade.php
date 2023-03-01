@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Lista Publicações')
+@section('title', 'Ver Publicações')
 
 @section('content')
 
@@ -18,7 +18,7 @@
         <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit">
         <i class="fas fa-fw fa-edit"></i> Editar 
         </button>
-        @if($pubs->estado =='Publish')
+        @if($pubs->estado =='Publicado')
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#unpublish">
             <i class="fas fa-fw fa-download"></i> Despublicar
         </button> 
@@ -191,7 +191,7 @@
                                 </div> 
                                 <div class="row row-cols-1"> 
                                     <div class="col"> 
-                                        <label> Link do Panfleto</label>
+                                        <label> Link</label>
                                         <input value="{{ $pubs->link }}"  name="link" id="link" class="form-control" > 
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
@@ -201,8 +201,9 @@
                                     <div class="col"> 
                                     <label>Estado</label>
                                      <select name="estado" value="{{ $pubs->estado }}" id="estado" class="form-control"  aria-label="Default select example" required="">
-                                        <option value="Publish">Publicar no site</option>
-                                        <option value="Unpublish">Não Publicar</option>  
+                                     <option value="">- Escolha uma opção -</option>  
+                                     <option value="Publicado">Publicar no Site</option>
+                                        <option value="Despublicado">Não Publicar</option> 
                                     </select>
                                     <div class="valid-feedback"></div>
                                     <div class="invalid-feedback">Campo obrigatório.</div>
@@ -309,6 +310,10 @@
         }
         #modal-footer{
             text-align: center; 
+        }
+        #edit,#vercapa,#publish,#unpublish,#apagar{      
+        height:auto;
+        z-index: 10000000;
         }
     </style>
 <script>

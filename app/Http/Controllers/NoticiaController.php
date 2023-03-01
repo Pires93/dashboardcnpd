@@ -31,7 +31,8 @@ class NoticiaController extends Controller
         $news->autor=$request->autor;
         $news->conteudo=$request->conteudo;
         $news->type=$request->type;
-        $news->estado = $request->estado; 
+        $news->estado = $request->estado;  
+        $news->created_at=date('Y-m-d H:i:s');
         $news->save();
 
         return redirect('/noticia')->with('message','Notícia publicada com sucesso!');
@@ -73,14 +74,14 @@ class NoticiaController extends Controller
     public function unpublishn($id)
     {
         $news = Noticia::find($id);
-        $news->estado="Unpublish";
+        $news->estado="Despublicado";
         $news->save();
         return back()->with('message','Notícia despublicada com sucesso!');
     } 
     public function publishn($id)
     {
         $news = Noticia::find($id);
-        $news->estado="Publish";
+        $news->estado="Publicado";
         $news->save();
         return back()->with('message','Notícia publicada com sucesso!');
     } 
@@ -89,7 +90,7 @@ class NoticiaController extends Controller
 
     public function ListarTodasApi()//pegar todos os ids
     { 
-        $state="Publish";
+        $state="Publicado";
         return Noticia::where('estado', $state)->orderBy('id', 'DESC')->get();
     }
     public function listarUltimos3()//pegar ultimos 3 ids

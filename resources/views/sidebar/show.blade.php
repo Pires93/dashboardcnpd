@@ -1,11 +1,11 @@
 @extends('layouts.master')
-@section('title', 'Ver Videos')
+@section('title', 'Ver menu')
 
 @section('content')
 
-@if($vide) 
+@if($side) 
       <!-- Breadcrumbs -->
-    {{ Breadcrumbs::render('Ver Video', $vide) }}
+    {{ Breadcrumbs::render('Ver Menu', $side) }}
      <!-- ALERT-->
      @if(session('message')) 
         <div class="alert alert-success" role="alert">
@@ -19,13 +19,13 @@
         <i class="fas fa-fw fa-edit"></i> Editar 
         </button>
         
-        @if($vide->estado =='Publicado')
+        @if($side->estado =='Ativo')
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#unpublish">
-            <i class="fas fa-fw fa-download"></i> Despublicar
+            <i class="fas fa-fw fa-eye-slash"></i> Desabilitar
         </button> 
         @else
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#publish">
-            <i class="fas fa-fw fa-download"></i> Publicar
+            <i class="fas fa-fw fa-eye"></i> Habilitar
         </button> 
         @endif
        
@@ -36,46 +36,44 @@
                 
     <div class="row" id="geral">  
         <div class="col-md-12" id="cabecalho">
-           <b>  {{ $vide->titulo }}</b>
+           <b>  {{ $side->titulo }}</b>
         </div> 
-        <div class="col-md-12"><br></div> 
-        @if($vide->type=="Youtube")
-        <iframe allow="fullscreen;" width="100%" height="550" :poster="'{{ url("storage/videos/")}}'+ $vide.capa "
-        src="https://www.youtube.com/embed/{{$vide->link}}?autoplay=0&mute=0">
-        </iframe>  
-        @else
-        <video width="100%" controls controls
-              :poster="'{{ url("storage/videos/")}}'+ $vide.capa " >
-            <source src="{{ $vide->link}}" type="video/mp4"> 
-        </video> 
-        @endif 
+        <div class="col-md-12" id=" "><b>Titulo:</b> {{  $side->titulo }}</div>
+        <div class="col-md-12" id=" "><b>Url:</b> {{  $side->url }}</div>
+        <div class="col-md-12" id=" "><b>Estado:</b> {{  $side->estado }}</div>
+        <div class="col-md-12" id=" "><b>Tipo:</b> {{  $side->type }}</div>
+        <div class="col-md-12" id=" "><b>Criado em:</b> {{  $side->created_at }}</div>
+        <div class="col-md-12" id=" "><b>Icon:</b> <i class="{{  $side->icon }}"></i></div>
+
+         
+        
       
     </div>
     <div id="apagar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="my-modal-title">Apagar video</h5>
+                        <h5 class="modal-title" id="my-modal-title">Apagar menu</h5>
                         <button class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="was-validated"  method="post" action="/video" >
+                        <form class="was-validated"  method="post" action="/sidebar" >
                             @csrf
                             <div class="row row-cols-1">
                             <div class="col" id="col"> 
-                                    Deseja realmente apagar esse item?
+                                    Deseja realmente apagar esse menu?
                                 <br>
-                                    <p>Título: {{ $vide->titulo}}</p>
-                                    <p>Data Criado: {{ $vide->created_at}}</p>
+                                    <p>Título: {{ $side->titulo}}</p>
+                                    <p>Data Criação: {{ $side->created_at}}</p>
                                 </div>  
                             </div>  
                             
                             <hr>
                             
                             <div id="modal-footer">
-                            <a href="/deleten/{{ $vide->id}}"
+                            <a href="/delete/{{ $side->id}}"
                                 class="btn btn-danger"> <i class="fas fa-trash"> Delete</i>
                             </a>  
                             </div>
@@ -88,28 +86,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title">Despublicar video</h5>
+                    <h5 class="modal-title" id="my-modal-title">Desabilitar menu</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form class="was-validated"  method="post" action="/video">
+                <form class="was-validated"  method="post" action="/sidebar">
                     @csrf
                     <div class="row row-cols-1">
                         <div class="col" id="col"> 
-                                Deseja realmente despublicar essa video do Site?
+                                Deseja realmente desabilitar esse menu?
                         <br>
-                                <p>Título: {{ $vide->titulo}}</p>
-                                <p>Publicado em: {{ $vide->created_at}}</p>
+                                <p>Título: {{ $side->titulo}}</p>
+                                <p>Criado em: {{ $side->created_at}}</p>
                         </div>  
                     </div>  
                         
                     <hr>
                     
                     <div id="modal-footer">
-                    <a href="/unpublishv/{{ $vide->id}}"
-                        class="btn btn-info"> <i class="fas fa-download"> Unpublish</i>
+                    <a href="/desabilitar/{{ $side->id}}"
+                        class="btn btn-info"> <i class="fas fa-eye-slash"> Disable</i>
                     </a>  
                     </div>
                 </form> 
@@ -124,27 +122,27 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title">Publicar video</h5>
+                    <h5 class="modal-title" id="my-modal-title">Habilitar menu</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form class="was-validated"  method="post" action="/video">
+                <form class="was-validated"  method="post" action="/sidebar">
                     @csrf
                     <div class="row row-cols-1">
                         <div class="col" id="col"> 
-                                Deseja realmente publicar essa video do Site?
+                                Deseja realmente habilitar esse menu?
                         <br>
-                                <p>Título: {{ $vide->titulo}}</p> 
+                                <p>Título: {{ $side->titulo}}</p> 
                         </div>  
                     </div>  
                         
                     <hr>
                     
                     <div id="modal-footer">
-                    <a href="/publishv/{{ $vide->id}}"
-                        class="btn btn-info"> <i class="fas fa-download"> Publish</i>
+                    <a href="/habilitar/{{ $side->id}}"
+                        class="btn btn-info"> <i class="fas fa-eye"> Publish</i>
                     </a>  
                     </div>
                 </form> 
@@ -159,69 +157,70 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="edit-title">Editar Video</h5>
+                    <h5 class="modal-title" id="edit-title">Editar menu</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                <form class="was-validated"  method="post" action="{{ url('/video/'.$vide->id)}}" enctype="multipart/form-data">
+                <form class="was-validated"  method="post" action="{{ url('/sidebar/'.$side->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH') 
                 
-                    <div class="row row-cols-1">
-                        <div class="col"> 
-                        <label>Título</label>
-                            <input type="text" value="{{ $vide->titulo }}" id="titulo" placeholder="Entre o título do video" name="titulo" class="form-control" required="">
-                            <div class="valid-feedback"></div>
-                            <div class="invalid-feedback">Campo obrigatório.</div>
-                        </div>  
+                <div class="row row-cols-1"> 
+                    <div class="col"> 
+                        <label>Nome de menu</label>
+                        <input type="text" id="titulo" value="{{ $side->titulo }}" placeholder="Nome do menu" name="titulo" class="form-control" required="" >
+                        <div class="valid-feedback"></div> 
+                        <div class="invalid-feedback">Campo obrigatório.</div>
                     </div>  
-                    <div class="row row-cols-1"> 
-                         <div class="col"> 
-                            <label>Link</label>
-                            <input type="text" value="{{ $vide->link }}" id="link" placeholder="Introduza o link do video" name="link" class="form-control" >
-                            <div class="valid-feedback"></div> 
-                        </div> 
-                        <div class="col"> 
-                            <label>Thumbnail</label>
-                            <input accept="image/png, image/gif, image/jpeg" value="{{ $vide->capa }}" type="file" id="capa" placeholder="Capa do video" name="capa" class="form-control" required="">
-                            <div class="valid-feedback"></div> 
-                            <div class="invalid-feedback">Campo obrigatório.</div>
-                        </div> 
-                        <div class="row row-cols-1"> 
-                            <div class="col">
-                                <label>Tipo link</label>
-                                <select name="type" id="type" class="form-control"  aria-label="Default select example" required>
-                                        <option value="">- Escolha uma opção -</option>  
-                                    <option value="Youtube">Link youtube</option>
-                                    <option value="Outro">Outro</option> 
-                                </select>
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Campo obrigatório.</div>
-                            </div>
-                        </div>   
-                        <!--<div class="col"> 
-                            <label>Anexo</label>
-                            <input type="file" value="{{ $vide->anexo }}" id="anexo" placeholder="Anexo de video" name="anexo" class="form-control">
-                            <div class="va id-feedback"></div> 
-                        </div> -->
+                </div> 
+                <div class="row row-cols-1"> 
+                    <div class="col"> 
+                        <label>Url do menu</label>
+                        <input type="text" id="url" value="{{ $side->url }}" placeholder="Url do menu" name="url" class="form-control" required="" >
+                        <div class="valid-feedback"></div> 
+                        <div class="invalid-feedback">Campo obrigatório.</div>
                     </div>  
-                    <div class="row row-cols-1"> 
-                        <div class="col"> 
-                        <label>Estado</label>
-                            <select name="estado" value="{{ $vide->estado }}" id="estado" class="form-control"  aria-label="Default select example" required="">
-                            <option value="Publicado">Publicar no Site</option>
-                            <option value="Despublicado">Não Publicar</option>
+                </div> 
+                <div class="row row-cols-1"> 
+                    <div class="col"> 
+                        <label>Icon de menu</label>
+                        <input type="text" id="icon" value="{{ $side->icon }}" placeholder="Icon do menu" name="icon" class="form-control" required="" >
+                        <div class="valid-feedback"></div> 
+                        <div class="invalid-feedback">Campo obrigatório.</div>
+                    </div>  
+                </div> 
+                <div class="row row-cols-1"> 
+                    <div class="col"> 
+                        <label>Tipo menu</label>
+                        <select value="{{ $side->type }}" name="type" id="type" class="form-control"  aria-label="Default select example" required="">
+                        <option value="">- Escolha uma opção -</option>  
+                        <option value="Normal">Normal</option>
+                            <option value="Formulario">Formulário</option>  
+                            <option value="Gestao">Gestão</option>  
                         </select>
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback">Campo obrigatório.</div>
-                        </div>  
-                    </div>    
-                    <hr>
-                    <div id="modal-footer"> 
-                        <button type="submit" class="btn btn-warning"> <i class="fas fa-fw fa-edit"></i> Editar</button>
-                    </div>
+                    </div>  
+                </div> 
+                <div class="row row-cols-1"> 
+                    <div class="col"> 
+                        <label>Estado</label>
+                        <select value="{{ $side->estado }}" name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
+                        <option value="">- Escolha uma opção -</option>  
+                        <option value="Ativo">Ativo</option>
+                            <option value="Inativo">Inativo</option> 
+                        </select>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback">Campo obrigatório.</div>
+                    </div>  
+                </div>  
+                        
+                <hr>
+                <div id="modal-footer"> 
+                    <button type="submit" class="btn btn-warning"> <i class="fas fa-fw fa-edit"></i> Editar</button>
+                </div>
                 </form> 
                 
 
@@ -234,7 +233,7 @@
     @else  
 <!-- Breadcrumbs -->
 
-{{ Breadcrumbs::render('Videos') }}
+{{ Breadcrumbs::render('Menu') }}
 <div class="col-md-12" id="notFound">
     <br>
     <p>ID não encontrado.</p>

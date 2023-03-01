@@ -32,7 +32,8 @@ class PedidoInformacaoController extends Controller
         $pedidos->email=$request->email;
         $pedidos->assunto=$request->assunto;
         $pedidos->duvida=$request->duvida; 
-        $pedidos->estado="Novo";  
+        $pedidos->estado="Novo";   
+        $pedidos->created_at=date('Y-m-d H:i:s');
         $pedidos->save();
         $pedidos->num_p=$pedidos->id ."_".date('Y'); 
         $pedidos->save();
@@ -60,6 +61,7 @@ class PedidoInformacaoController extends Controller
         $pedido = PedidoInformacao::find($id);
         $update=$request->all();
         $pedido->data_r=date('Y-m-d H:i:s');
+        $pedido->estado="Respondido";   
         $pedido->update($update);
 
         return redirect('pedidoInformacao')->with('flash_message','Pedido Updated!');

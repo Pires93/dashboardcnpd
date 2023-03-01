@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'List pedidos')
+@section('title', 'Ver Duvidas')
 
 @section('content')
 
@@ -9,9 +9,11 @@
     <!-- Breadcrumbs -->
     {{ Breadcrumbs::render('Ver Pedido', $pedido) }}
     <div id="accoes">
+    @if($pedido->estado =='Novo')
         <a class="btn btn-danger" href="{{ url('/pedidoInformacao/' . $pedido->id) }}/edit">
-            <i class="fa fa-reply" aria-hidden="true"></i>  Responder
+                <i class="fa fa-reply" aria-hidden="true"></i>  Responder
         </a>
+    @endif
     </div>
     <div class="row">
 

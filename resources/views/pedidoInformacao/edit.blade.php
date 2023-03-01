@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Criar Pedidos')
+@section('title', 'Editar Duvidas')
 
 @section('content')
 

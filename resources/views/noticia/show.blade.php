@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Lista Notícias')
+@section('title', 'Ver Notícias')
 
 @section('content')
 
@@ -19,7 +19,7 @@
         <i class="fas fa-fw fa-edit"></i> Editar 
         </button>
         
-        @if($news->estado =='Publish')
+        @if($news->estado =='Publicado')
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#unpublish">
             <i class="fas fa-fw fa-download"></i> Despublicar
         </button> 
@@ -223,8 +223,9 @@
                         <div class="col"> 
                         <label>Estado</label>
                             <select name="estado" value="{{ $news->estado }}" id="estado" class="form-control"  aria-label="Default select example" required="">
-                            <option value="Publish">Publicar no Site</option>
-                            <option value="Unpublish">Não Publicar</option>  
+                            <option value="">- Escolha uma opção -</option>  
+                            <option value="Publicado">Publicar no site</option>
+                             <option value="Despublicado">Não publicar</option>   
                         </select>
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback">Campo obrigatório.</div>
@@ -348,6 +349,11 @@
         #modal-footer{
             text-align: center; 
         }
+        #edit,#vercapa,#publish,#unpublish,#apagar{      
+        height:auto;
+        z-index: 10000000;
+        }
+        
     </style>
 <script>
     setTimeout(function(){

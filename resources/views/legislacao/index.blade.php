@@ -1,12 +1,13 @@
 @extends('layouts.master')
 @section('title', 'Lista  CCTV')
-
+ 
 @section('content')
 
 
      <!-- Breadcrumbs -->
      {{ Breadcrumbs::render('Legislação') }}
-
+      <link href="{{ asset('admin/css/styleDatatable.css') }}" rel="stylesheet" type="text/css">
+    
     <div class="row">
         <div class="col-md-12 col-md-12"> 
             <div class="card shadow mb-4">
@@ -62,8 +63,9 @@
                                     <div class="col"> 
                                     <label>Estado</label>
                                      <select name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
-                                        <option value="Publish">Publicar no site</option>
-                                        <option value="Unpublish">Não publicar</option> 
+                                       <option value="">- Escolha uma opção -</option>  
+                                       <option value="Publicado">Publicar no Site</option>
+                                        <option value="Despublicado">Não Publicar</option>  
                                     </select>
                                     <div class="valid-feedback"></div>
                                     <div class="invalid-feedback">Campo obrigatório.</div>
@@ -81,24 +83,22 @@
                                 <div id="modal-footer"> 
                                     <button type="submit" class="btn btn-success"> <i class="fas fa-fw fa-save"></i> Submeter</button>
                                 </div>
-                            </form> 
-                            
-
-
+                            </form>  
                             </div>                            
                         </div>
                     </div>
                 </div>
                      
                  <!--end Large modal -->
-                    <div class="card-body">
+                    <div class="card-body"> 
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                             
+                            <table class="display dataTable cell-border" id="nhatabela" width="100%" cellspacing="0">
                                 <thead>
                                     <tr> 
                                         <th>Id</th>
                                         <th>Título</th>
-                                        <th>Data Criação</th>
+                                        <th>Data Criação</th> 
                                         <th>Estado</th>
                                         <th>Actions</th>
                                     </tr>
@@ -113,16 +113,17 @@
                                                 <td>{{ $lei->estado}}</td>
                                                 <td>
                                                     <a href="{{ url('/legislacao/' . $lei->id) }}"
-                                                        class="btn btn-info btn-circle"> <i class="fas fa-eye"></i>
+                                                        class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>
                                                     </a> 
                                                 </td> 
                                             </tr>
                                         @endforeach
                                     @endif
 
-                                </tbody>
+                                </tbody>  
 
                             </table>
+                             
                         </div>
                     </div>
                 </div>
@@ -130,7 +131,14 @@
         </div>
     </div>  
     
-      <style>
+<style>
+     
+        #search{ 
+            text-align:right;
+        }
+        #myInput{
+            width:50%;
+        }
         #modal-body{
             color: #061536;
             font-family: 'Times New Roman', Times, serif;
@@ -148,8 +156,30 @@
         #modal-footer{
             text-align: center; 
         }
-    </style> 
+        #my-modal{      
+        z-index: 10000000;
+        }
+</style> 
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+        crossorigin="anonymous">
+</script> 
+<script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js">
+</script> 
+<script src="https://code.jquery.com/jquery-3.5.1.js">
+</script> 
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" 
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" 
+    crossorigin="anonymous">
+</script>
+<script src="{{ asset('admin/js/Datatable.js') }}"></script> 
     <script>
+         
+      let table = new DataTable('#nhatabela'); 
+         
         setTimeout(function(){
             $(".alert").slideUp(500, function(){
                 $(this).remove(); 
@@ -157,5 +187,4 @@
       //  window.location.reload();
         }, 5000)
     </script>
- 
 @endsection

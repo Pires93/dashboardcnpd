@@ -11,6 +11,9 @@ use App\Models\Noticia;
 use App\Models\Legislacao;
 use App\Models\Publicacoes;
 use App\Models\Video;
+use App\Models\Sidebar;
+use App\Models\user;
+
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
@@ -50,9 +53,11 @@ Breadcrumbs::for('Lista Users', function ($trail) {
     $trail->parent('Dashboard');
     $trail->push('Lista Users', route('users.index'));
 });
-Breadcrumbs::for('Novo User', function ($trail) {
-    $trail->Parent('Lista Users', route('users.index'));
-    $trail->push('Novo User', route('create'));
+ 
+//MOSTRAR id
+Breadcrumbs::for('Ver User', function (BreadcrumbTrail $trail, User $user) {
+    $trail->parent('Lista Users', route('users.index'));
+    $trail->push("User ID - ".$user->id, route('show', $user));
 });
 
 /******************************************CCTV****************************************** */
@@ -137,5 +142,16 @@ Breadcrumbs::for('Videos', function ($trail) {
 Breadcrumbs::for('Ver Video', function (BreadcrumbTrail $trail, Video $vide) {
     $trail->parent('Videos', route('video.index'));
     $trail->push("Video ID - ".$vide->id, route('show', $vide));
+});
+/******************************************VIDEOS****************************************** */
+// LISTA TODOS OS SIDEBARS
+Breadcrumbs::for('Menu', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Menu', route('sidebar.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Ver Menu', function (BreadcrumbTrail $trail, Sidebar $side) {
+    $trail->parent('Menu', route('sidebar.index'));
+    $trail->push("Menu ID - ".$side->id, route('show', $side));
 });
 ?>

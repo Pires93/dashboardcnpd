@@ -91,6 +91,8 @@ class PublicacoesController extends Controller
           $capaname = $request->imagem->storeAs('publicacoesPdf',$nameBd);//renomear noime da imagem na pasta 
           $pubs->imagem=$nameBd;
         } 
+
+        $pubs->created_at=date('Y-m-d H:i:s');
         $pubs->save();
         //$pubs->update($editarDados);
 
@@ -101,7 +103,7 @@ class PublicacoesController extends Controller
     public function unpublishp($id)
     {
         $pubs = Publicacoes::find($id);
-        $pubs->estado="Unpublish";
+        $pubs->estado="Despublicado";
         $pubs->save();
         return back()->with('message','Documento despublicado com sucesso!');
     } 
@@ -109,7 +111,7 @@ class PublicacoesController extends Controller
     public function publishp($id)
     {
         $pubs = Publicacoes::find($id);
-        $pubs->estado="Publish";
+        $pubs->estado="Publicado";
         $pubs->save();
         return back()->with('message','Documento publicado com sucesso!');
     } 
@@ -126,7 +128,7 @@ class PublicacoesController extends Controller
     public function ListarIsencoes()
     { 
        $type="Isencao";
-       $estado="Publish";
+       $estado="Publicado";
        return Publicacoes::where(['type'=>$type,'estado'=>$estado])->orderBy('id', 'DESC')->get();
     } 
     public function IsencaoId($id)
@@ -137,37 +139,37 @@ class PublicacoesController extends Controller
     public function ListarDeliberacao()
     { 
        $type="Deliberacao";
-       $estado="Publish";
+       $estado="Publicado";
        return Publicacoes::where(['type'=>$type,'estado'=>$estado])->orderBy('id', 'DESC')->get(); 
     }
     public function ListarDiretivas()
     { 
        $type="Diretiva";
-       $estado="Publish";
+       $estado="Publicado";
        return Publicacoes::where(['type'=>$type,'estado'=>$estado])->orderBy('id', 'DESC')->get();
     }
     public function ListarRelatorios()
     { 
        $type="Relatorio Atividade";
-       $estado="Publish";
+       $estado="Publicado";
        return Publicacoes::where(['type'=>$type,'estado'=>$estado])->orderBy('id', 'DESC')->get();
     }
     public function ListarPlanos()
     { 
        $type="Plano Atividade";
-       $estado="Publish";
+       $estado="Publicado";
        return Publicacoes::where(['type'=>$type,'estado'=>$estado])->orderBy('id', 'DESC')->get();
     }
     public function ListarComunicados()
     { 
        $type="Comunicado";
-       $estado="Publish";
+       $estado="Publicado";
        return Publicacoes::where(['type'=>$type,'estado'=>$estado])->orderBy('id', 'DESC')->get();
     }
     public function ListarPanfletos()
     { 
        $type="Panfleto";
-       $estado="Publish";
+       $estado="Publicado";
        return Publicacoes::where(['type'=>$type,'estado'=>$estado])->orderBy('id', 'DESC')->get();
     }
 

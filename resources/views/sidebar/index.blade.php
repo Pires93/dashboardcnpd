@@ -1,11 +1,11 @@
 @extends('layouts.master')
-@section('title', 'Vídeos Site')
+@section('title', 'Gestão de menu')
 
 @section('content')
 
 
      <!-- Breadcrumbs -->
-     {{ Breadcrumbs::render('Videos') }}
+     {{ Breadcrumbs::render('Menu') }}
 
      <link href="{{ asset('admin/css/styleDatatable.css') }}" rel="stylesheet" type="text/css">
     
@@ -24,77 +24,72 @@
                 
 
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Videos CNPD</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Menu Dashboard Manager</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                  <!-- Large modal -->
                 <div class="nova">
                     <button class="btn btn-success" type="button" data-toggle="modal" data-target="#my-modal">
-                    <i class="fas fa-fw fa-plus"></i> Adicionar 
+                    <i class="fas fa-fw fa-list"></i> Add New Menu 
                     </button>
                 </div>
                 <div id="my-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="my-modal-title">Publicar video</h5>
+                                <h5 class="modal-title" id="my-modal-title">Novo Menu</h5>
                                 <button class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                            <form class="was-validated"  method="post" action="/video" enctype="multipart/form-data">
-                                @csrf
-                                <div class="row row-cols-1">
+                            <form class="was-validated"  method="post" action="/sidebar" enctype="multipart/form-data">
+                                @csrf  
+                                <div class="row row-cols-1"> 
                                     <div class="col"> 
-                                        <input type="text" id="titulo" placeholder="Introduza o título do video" name="titulo" class="form-control" required="">
+                                        <label>Nome de menu</label>
+                                        <input type="text" id="titulo" placeholder="Nome do menu" name="titulo" class="form-control" required="" >
                                         <div class="valid-feedback"></div> 
+                                        <div class="invalid-feedback">Campo obrigatório.</div>
                                     </div>  
                                 </div> 
-                                <br>  
                                 <div class="row row-cols-1"> 
-                                <div class="col"> 
-                                    <label>Thumbnail</label>
-                                    <input accept="image/png, image/gif, image/jpeg" type="file" id="capa" placeholder="Capa do video" name="capa" class="form-control" required="">
-                                    <div class="valid-feedback"></div> 
-                                    <div class="invalid-feedback">Campo obrigatório.</div>
-                                </div>  
+                                    <div class="col"> 
+                                        <label>Url de menu</label>
+                                        <input type="text" id="url" placeholder="Url do menu" name="url" class="form-control" required="" >
+                                        <div class="valid-feedback"></div> 
+                                        <div class="invalid-feedback">Campo obrigatório.</div>
+                                    </div>  
+                                </div>
+                                <div class="row row-cols-1"> 
+                                    <div class="col"> 
+                                        <label>Icon de menu</label>
+                                        <input type="text" id="icon" placeholder="Icon do menu" name="icon" class="form-control" required="" >
+                                        <div class="valid-feedback"></div> 
+                                        <div class="invalid-feedback">Campo obrigatório.</div>
+                                    </div>  
                                 </div> 
-                                  
                                 <div class="row row-cols-1"> 
-                                    <div class="col">
-                                        <label>Tipo link</label>
-                                        <select name="type" id="type" class="form-control"  aria-label="Default select example" required>
-                                             <option value="">- Escolha uma opção -</option>  
-                                            <option value="Youtube">Link youtube</option>
-                                            <option value="Outro">Outro</option> 
+                                    <div class="col"> 
+                                        <label>Tipo menu</label>
+                                        <select name="type" id="type" class="form-control"  aria-label="Default select example" required="">
+                                        <option value="">- Escolha uma opção -</option>  
+                                        <option value="Normal">Normal</option>
+                                        <option value="Formulario">Formulário</option>  
+                                        <option value="Gestao">Gestão</option>  
                                         </select>
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>
-                                </div> 
-                                <div class="row row-cols-1"> 
-                                    <div class="col"> 
-                                        <label>Link</label>
-                                        <input type="text" id="link" placeholder="Introduza o link do video" name="link" class="form-control" required="" >
-                                        <div class="valid-feedback"></div> 
                                     </div>  
-                                </div>
-                               <!-- <div class="row row-cols-1"> 
-                                    <div class="col"> 
-                                        <label>Anexo</label>
-                                        <input  accept="application/mp4, application/mov" type="file" id="anexo" placeholder="Anexo de video" name="anexo" class="form-control">
-                                        <div class="va id-feedback"></div> 
-                                     </div> 
-                                </div> --> 
+                                </div> 
                                 <div class="row row-cols-1"> 
                                     <div class="col"> 
                                         <label>Estado</label>
                                         <select name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
                                         <option value="">- Escolha uma opção -</option>  
-                                        <option value="Publicado">Publicar no Site</option>
-                                        <option value="Despublicado">Não Publicar</option>
+                                        <option value="Ativo">Ativo</option>
+                                        <option value="Inativo">Inativo</option> 
                                         </select>
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
@@ -102,7 +97,7 @@
                                 </div>    
                                 <hr>
                                 <div id="modal-footer"> 
-                                    <button type="submit" class="btn btn-success"> <i class="fas fa-fw fa-save"></i> Submeter</button>
+                                    <button type="submit" class="btn btn-success"> <i class="fas fa-fw fa-save"></i> Guardar</button>
                                 </div>
                             </form> 
                             
@@ -116,7 +111,7 @@
                  <!--end Large modal -->
                     <div class="card-body">
                         <div class="table-responsive">
-                        <table class="display dataTable cell-border" id="nhatabela" width="100%" cellspacing="0">
+                        <table class="display dataTable cell-border"  id="nhatabela" width="100%" cellspacing="0">
                                 <thead>
                                     <tr> 
                                         <th>Id</th>
@@ -127,16 +122,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($vide)
-                                        @foreach ($vide as $vid)
+                                    @if ($side)
+                                        @foreach ($side as $sid)
                                             <tr> 
-                                                <td>{{ $vid->id  }}</td>
-                                                <td>{{ $vid->titulo  }}</td> 
-                                                <td>{{ $vid->created_at}}</td>
-                                                <td>{{ $vid->estado  }}</td> 
+                                                <td>{{ $sid->id  }}</td>
+                                                <td>{{ $sid->titulo  }}</td> 
+                                                <td>{{ $sid->created_at}}</td>
+                                                <td>{{ $sid->estado  }}</td> 
                                                 <td>
-                                                    <a href="{{ url('/video/' . $vid->id) }}"
-                                                        class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>
+                                                    <a href="{{ url('/sidebar/' . $sid->id) }}"
+                                                        class="btn btn-info btn-circle"> <i class="fas fa-eye"></i>
                                                     </a> 
                                                 </td> 
                                             </tr>
@@ -175,7 +170,7 @@
             text-align: center; 
         }
     </style> 
-        
+             
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
         crossorigin="anonymous">
@@ -202,5 +197,6 @@
       //  window.location.reload();
         }, 5000)
     </script>
+ 
  
 @endsection

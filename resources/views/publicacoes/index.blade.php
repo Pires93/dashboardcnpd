@@ -1,11 +1,14 @@
 @extends('layouts.master')
-@section('title', 'Lista  CCTV')
+@section('title', 'Publicações no Site')
 
 @section('content')
 
 
      <!-- Breadcrumbs -->
      {{ Breadcrumbs::render('Publicações') }}
+
+     <link href="{{ asset('admin/css/styleDatatable.css') }}" rel="stylesheet" type="text/css">
+    
 
     <div class="row">
         <div class="col-md-12 col-md-12"> 
@@ -69,8 +72,9 @@
                                     <div class="col"> 
                                     <label>Estado</label>
                                      <select name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
-                                        <option value="Publish">Publicar no site</option>
-                                        <option value="Unpublish">Não publicar</option> 
+                                     <option value="">- Escolha uma opção -</option>  
+                                     <option value="Publicado">Publicar no site</option>
+                                        <option value="Despublicado">Não publicar</option> 
                                     </select>
                                     <div class="valid-feedback"></div>
                                     <div class="invalid-feedback">Campo obrigatório.</div>
@@ -78,7 +82,8 @@
                                     <div class="col"> 
                                     <label>Tipo documento</label>
                                      <select name="type" id="type" class="form-control"  aria-label="Default select example" required="">
-                                        <option value="Deliberacao">Deliberação</option>
+                                     <option value="">- Escolha uma opção -</option>  
+                                     <option value="Deliberacao">Deliberação</option>
                                         <option value="Diretiva">Diretiva</option> 
                                         <option value="Isencao">Isenção</option> 
                                         <option value="Relatorio Atividade">Relatório atividade</option>
@@ -93,7 +98,7 @@
                                 </div> 
                                 <div class="row row-cols-1"> 
                                     <div class="col"> 
-                                        <label>Link do Panfleto</label> 
+                                        <label>Link</label> 
                                         <input  accept="application/pdf" type="text" id="link" placeholder="Pretende inserir algum endereço web?" name="link" class="form-control">
                                         <div class="valid-feedback"></div>
                                     </div>
@@ -122,7 +127,7 @@
                  <!--end Large modal -->
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="display dataTable cell-border" id="nhatabela" width="100%" cellspacing="0">
                                 <thead>
                                     <tr> 
                                         <th>Id</th>
@@ -144,7 +149,7 @@
                                                 <td>{{ $pub->estado}}</td>
                                                 <td>
                                                     <a href="{{ url('/publicacoes/' . $pub->id) }}"
-                                                        class="btn btn-info btn-circle"> <i class="fas fa-eye"></i>
+                                                        class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>
                                                     </a> 
                                                 </td> 
                                             </tr>
@@ -162,6 +167,9 @@
     </div>  
     
       <style>
+        #my-modal{      
+        z-index: 10000000;
+        }
         #modal-body{
             color: #061536;
             font-family: 'Times New Roman', Times, serif;
@@ -180,7 +188,26 @@
             text-align: center; 
         }
     </style> 
+           
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+        crossorigin="anonymous">
+</script> 
+<script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js">
+</script> 
+<script src="https://code.jquery.com/jquery-3.5.1.js">
+</script> 
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" 
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" 
+    crossorigin="anonymous">
+</script>
+<script src="{{ asset('admin/js/Datatable.js') }}"></script> 
     <script>
+         
+      let table = new DataTable('#nhatabela'); 
+         
         setTimeout(function(){
             $(".alert").slideUp(500, function(){
                 $(this).remove(); 

@@ -9,9 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app-name', ' | SGD CNPD') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}"> 
+    <title>@yield('title') | SGD CNPD  </title>
 
 
     <!-- Custom fonts for this template-->
@@ -114,8 +113,9 @@
 
 </html>
 
-<style>
+<style> 
 #content{
-    margin-left: 10px;
+    margin-left: 35px;
+    padding-top: 100px; 
 }
 </style>

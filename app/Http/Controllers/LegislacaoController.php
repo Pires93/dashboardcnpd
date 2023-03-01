@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Legislacao;
 use Illuminate\Http\Request; 
+use Datatables;
 
 class LegislacaoController extends Controller
 {
 
     public function index()
     {
-        $leis = Legislacao::orderBy('created_at')->get();
+        $leis = Legislacao::orderBy('created_at')->get(); 
         return view('legislacao.index')->with('leis',$leis);
-    }
-
+       
+    } 
 
 
     public function store(Request $request)
@@ -27,6 +28,7 @@ class LegislacaoController extends Controller
           $capaname = $request->anexo->storeAs('legislacaoPdf',$nameBd);//renomear noime da imagem na pasta 
           $leis->anexo=$nameBd;
         }   
+        $leis->created_at=date('Y-m-d H:i:s');
         $leis->save();
 
         return redirect('/legislacao')->with('message','Legislação publicada com sucesso!');
@@ -62,7 +64,7 @@ class LegislacaoController extends Controller
     public function unpublishl($id)
     {
         $leis = Legislacao::find($id);
-        $leis->estado="Unpublish";
+        $leis->estado="Despublicado";
         $leis->save();
         return back()->with('message','Legislação despublicada com sucesso!');
     } 
@@ -70,7 +72,7 @@ class LegislacaoController extends Controller
     public function publishl($id)
     {
         $leis = Legislacao::find($id);
-        $leis->estado="Publish";
+        $leis->estado="Publicado";
         $leis->save();
         return back()->with('message','Legislação publicada com sucesso!');
     } 
@@ -86,7 +88,7 @@ class LegislacaoController extends Controller
 
      public function ListarLegislacao()
      { 
-        $state="Publish";
+        $state="Publicado";
          return Legislacao::where('estado', $state)->orderBy('id', 'DESC')->get();
      }
       

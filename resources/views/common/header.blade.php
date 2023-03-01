@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand  navbar-fixed-top navbar-light topbar mb-4 shadow " id="backcolor">
+<nav class="navbar navbar-expand navbar-light topbar mb-4 shadow " id="backcolor">
 
 
     <!-- Sidebar Toggle (Topbar) -->
@@ -193,11 +193,12 @@
 </nav>
 <style>
     #backcolor{
-        background-color: #fff;
-       /* position: fixed;
-        top: 0;
-  width: 100%;
-  overflow: hidden;*/
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9000;  
     }
     #iconcolor{
         color: #061536;
