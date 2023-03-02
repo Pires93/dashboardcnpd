@@ -77,7 +77,7 @@
                                         <option value="">- Escolha uma opção -</option>  
                                         <option value="Normal">Normal</option>
                                         <option value="Formulario">Formulário</option>  
-                                        <option value="Gestao">Gestão</option>  
+                                        <option value="Gestao">Gestão de Site</option>  
                                         </select>
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
@@ -128,10 +128,16 @@
                                                 <td>{{ $sid->id  }}</td>
                                                 <td>{{ $sid->titulo  }}</td> 
                                                 <td>{{ $sid->created_at}}</td>
-                                                <td>{{ $sid->estado  }}</td> 
+                                                <td>
+                                                @if($sid->estado=="Ativo") 
+                                                    <span class="text-success">{{ $sid->estado}}</span>
+                                                    @else
+                                                    <span class="text-warning">{{ $sid->estado}}</span>
+                                                    @endif
+                                                </td> 
                                                 <td>
                                                     <a href="{{ url('/sidebar/' . $sid->id) }}"
-                                                        class="btn btn-info btn-circle"> <i class="fas fa-eye"></i>
+                                                        class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>
                                                     </a> 
                                                 </td> 
                                             </tr>

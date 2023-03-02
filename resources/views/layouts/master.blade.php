@@ -118,4 +118,7 @@
     margin-left: 35px;
     padding-top: 100px; 
 }
+#logoutModal{
+    z-index: 10000000;
+}
 </style>

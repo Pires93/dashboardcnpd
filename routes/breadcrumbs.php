@@ -12,7 +12,8 @@ use App\Models\Legislacao;
 use App\Models\Publicacoes;
 use App\Models\Video;
 use App\Models\Sidebar;
-use App\Models\user;
+use App\Models\user; 
+use App\Models\Conselhospratico;
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
@@ -154,4 +155,17 @@ Breadcrumbs::for('Ver Menu', function (BreadcrumbTrail $trail, Sidebar $side) {
     $trail->parent('Menu', route('sidebar.index'));
     $trail->push("Menu ID - ".$side->id, route('show', $side));
 });
+
+/******************************************CONSELHOS PRATICOS****************************************** */
+ // LISTA TODOS OS CONSELHOS PRATICOS
+Breadcrumbs::for('Conselhos Práticos', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Conselhos Práticos', route('conselhopratico.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Ver Conselho Prático', function (BreadcrumbTrail $trail, Conselhospratico $consel) {
+    $trail->parent('Conselhos Práticos', route('conselhopratico.index'));
+    $trail->push("Conselho Prático ID - ".$consel->id, route('show', $consel));
+});
+ 
 ?>

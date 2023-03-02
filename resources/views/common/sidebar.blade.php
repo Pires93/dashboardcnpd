@@ -79,12 +79,12 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Gestão</span>
+                <span>Gestão de Site</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded"> 
             <?php
-            $menus = Sidebar::where(['estado'=>'Ativo','type'=>'Gestao'])->get();
+            $menus = Sidebar::where(['estado'=>'Ativo','type'=>'Gestao'])->orderBy('titulo', 'ASC')->get();
              foreach ($menus as $menu) 
                 {
                 ?> 

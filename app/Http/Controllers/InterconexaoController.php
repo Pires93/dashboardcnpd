@@ -143,7 +143,8 @@ class InterconexaoController extends Controller
         $pedidos->outraforma_direito_acesso=$request->outraforma_direito_acesso;
         $pedidos->medidas_fisicas_seguranca=$request->medidas_fisicas_seguranca;
         $pedidos->medidas_logicas_seguranca=$request->medidas_logicas_seguranca;
- 
+        $pedidos->estado="Novo";
+        $pedidos->tipo="Interconexao";
         
         $pedidos->save();
 
@@ -179,7 +180,7 @@ class InterconexaoController extends Controller
             }  
        } 
         //DADOS DE TRANSFERENCIAS INTERNACIONAIS
-      if($request->array_transferencia_internacional){
+      if($request->array_transferencia_internacional!=NULL){
             $transfInternacional = $request->array_transferencia_internacional; 
             foreach ($transfInternacional as $dataC) {
                 $count1 = count( $transfInternacional);

@@ -64,7 +64,7 @@ class PedidoInformacaoController extends Controller
         $pedido->estado="Respondido";   
         $pedido->update($update);
 
-        return redirect('pedidoInformacao')->with('flash_message','Pedido Updated!');
+        return redirect('pedidoInformacao')->with('message','Pedido respondido com sucesso!'); 
     }
 
     public function destroy($id)

@@ -93,6 +93,8 @@ return new class extends Migration
             $table->text('outraforma_direito_acesso')->nullable();
             $table->text('medidas_fisicas_seguranca')->nullable();
             $table->text('medidas_logicas_seguranca')->nullable();
+            $table->string('tipo')->nullable();
+            $table->string('estado')->nullable();
 
         });
     }

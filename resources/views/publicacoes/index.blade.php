@@ -146,7 +146,13 @@
                                                 <td>{{ $pub->titulo  }}</td>
                                                 <td>{{ $pub->type }}</td>
                                                 <td>{{ $pub->created_at}}</td>
-                                                <td>{{ $pub->estado}}</td>
+                                                <td>
+                                                @if($pub->estado=="Publicado") 
+                                                    <span class="text-success">{{ $pub->estado}}</span>
+                                                    @else
+                                                    <span class="text-warning">{{ $pub->estado}}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a href="{{ url('/publicacoes/' . $pub->id) }}"
                                                         class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>

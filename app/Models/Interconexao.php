@@ -87,6 +87,8 @@ class Interconexao extends Model
        'outraforma_direito_acesso',
        'medidas_fisicas_seguranca',
        'medidas_logicas_seguranca',
+       'estado',
+       'tipo'
 
 
 

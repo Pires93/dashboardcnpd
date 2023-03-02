@@ -65,15 +65,14 @@ class VideovigilanciaController extends Controller
         $pedidos->forma_direito_acesso=$request->forma_direito_acesso;
         $pedidos->outraforma_direito_acesso=$request->outraforma_direito_acesso;
         $pedidos->medidas_fisicas_seguranca=$request->medidas_fisicas_seguranca;
-        $pedidos->medidas_logicas_seguranca=$request->medidas_logicas_seguranca;
-        //$pedidos->parecer_representante_trabalhadores=$request->parecer_representante_trabalhadores;
-
+        $pedidos->medidas_logicas_seguranca=$request->medidas_logicas_seguranca; 
         if($request->parecer_representante_trabalhadores) { 
             $nameBd=now().'.'.$request->parecer_representante_trabalhadores->extension(); 
           $capaname = $request->parecer_representante_trabalhadores->storeAs('parecerTrabalhadores',$nameBd);//renomear noime da imagem na pasta 
           $pedidos->parecer_representante_trabalhadores=$nameBd;
         }   
 
+        $pedidos->tipo="CCTV";
         $pedidos->estado="Novo";
         $pedidos->created_at=date('Y-m-d H:i:s');
 
@@ -82,10 +81,7 @@ class VideovigilanciaController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        //
-    }
+    
 
 
     public function show($id)

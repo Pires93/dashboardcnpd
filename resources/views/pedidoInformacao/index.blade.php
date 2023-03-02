@@ -9,6 +9,7 @@
     
     <link href="{{ asset('admin/css/styleDatatable.css') }}" rel="stylesheet" type="text/css">
     
+ 
     <div class="row">
         <div class="col-md-12 col-md-12">
             <div class="card shadow mb-4">
@@ -30,6 +31,15 @@
                             </div>
                         </div>-->
                 </div>
+
+                <!-- ALERT-->
+                @if(session('message')) 
+                    <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Success!</h4>
+                    <p>{{ session('message')}}</p>
+                    </div>  
+                    
+                @endif
                 <!-- Card Body -->
                 <div class="card-body"> 
                     <div class="card-body">
@@ -53,7 +63,13 @@
                                                 <td>{{ $pedido->num_p }}</td>
                                                 <td>{{ $pedido->assunto }}</td>
                                                 <td>{{ $pedido->created_at }}</td>
-                                                <td>{{ $pedido->estado }}</td>
+                                                <td>
+                                                @if($pedido->estado=="Respondido") 
+                                                    <span class="text-success">{{ $pedido->estado}}</span>
+                                                    @else
+                                                    <span class="text-warning">{{ $pedido->estado}}</span>
+                                                    @endif
+                                                </td>
                                                 <td style="text-align: center">
                                                     <a href="{{ url('/pedidoInformacao/' . $pedido->id) }}"
                                                         class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>

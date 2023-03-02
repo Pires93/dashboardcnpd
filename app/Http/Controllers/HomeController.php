@@ -34,7 +34,12 @@ class HomeController extends Controller
     
     public function login()
     {
-        return view('home');
+        $countA = DB::table('videovigilancias')->count();
+        $countB = DB::table('geolocalizacaos')->count();
+        $countC = DB::table('interconexaos')->count();
+        $countTotal = $countA + $countB + $countC; 
+ 
+        return view('home')->with('countTotal',$countTotal);
     }
 
 

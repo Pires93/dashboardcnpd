@@ -60,7 +60,8 @@ class Videovigilancia extends Model
             'medidas_fisicas_seguranca',
             'medidas_logicas_seguranca',
             'parecer_representante_trabalhadores',
-            'estado'
+            'estado',
+            'tipo'
         ];
 
         protected $casts = [

@@ -11,7 +11,8 @@ use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\LegislacaoController; 
 use App\Http\Controllers\PublicacoesController; 
 use App\Http\Controllers\VideoController; 
-use App\Http\Controllers\SidebarController; 
+use App\Http\Controllers\SidebarController;  
+use App\Http\Controllers\ConselhospraticoController;  
 
 use Illuminate\Support\Facades\Auth;
 
@@ -29,13 +30,14 @@ Route::get('/pedidoInformacao/{id}', [PedidoInformacaoController::class, 'show']
 
 
 //USERS ROUTES
-
 Route::resource("/users",UserController::class)->middleware('auth');
 Route::post('/users', [UserController::class, 'store'])->name('index')->middleware('auth');
 Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('index')->middleware('auth');
 Route::get('/desativar/{id}', [UserController::class, 'desativar'])->name('index')->middleware('auth');
 Route::get('/ativar/{id}', [UserController::class, 'ativar'])->name('index')->middleware('auth');
- 
+Route::get('/users/{profile}',[UserController::class, 'profile'])->name('users.profile');
+
+
 
 //CCTV ROUTES
 Route::resource("/videovigilancia",VideovigilanciaController::class)->middleware('auth');
@@ -86,8 +88,13 @@ Route::get('/delete/{id}', [SidebarController::class, 'destroy'])->name('index')
 Route::get('/desabilitar/{id}', [SidebarController::class, 'desabilitar'])->name('index')->middleware('auth');
 Route::get('/habilitar/{id}', [SidebarController::class, 'habilitar'])->name('index')->middleware('auth');
  
-
-
+ //CONSELHOS PRATICOS ROUTES 
+Route::resource("/conselhopratico",ConselhospraticoController::class)->middleware('auth'); 
+Route::post('/noticia', [ConselhospraticoController::class, 'store'])->name('index')->middleware('auth');
+Route::get('/delete/{id}', [ConselhospraticoController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/unpublish/{id}', [ConselhospraticoController::class, 'unpublish'])->name('index')->middleware('auth');
+Route::get('/publish/{id}', [ConselhospraticoController::class, 'publish'])->name('index')->middleware('auth');
+ 
 
 
 
@@ -98,7 +105,4 @@ Route::get('/habilitar/{id}', [SidebarController::class, 'habilitar'])->name('in
 
 
  
-
-
-Route::get('/users/{profile}',[UserController::class, 'profile'])->name('users.profile');
 

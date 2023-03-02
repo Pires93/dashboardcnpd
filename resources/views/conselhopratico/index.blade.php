@@ -1,11 +1,11 @@
 @extends('layouts.master')
-@section('title', 'Vídeos Site')
+@section('title', 'Conselhos Práticos')
 
 @section('content')
 
 
      <!-- Breadcrumbs -->
-     {{ Breadcrumbs::render('Videos') }}
+     {{ Breadcrumbs::render('Conselhos Práticos') }}
 
      <link href="{{ asset('admin/css/styleDatatable.css') }}" rel="stylesheet" type="text/css">
     
@@ -24,7 +24,7 @@
                 
 
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary"> Videos CNPD</h6>
+                    <h6 class="m-0 font-weight-bold text-primary"> Conselhos Práticos CNPD</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -38,71 +38,57 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="my-modal-title">Publicar video</h5>
+                                <h5 class="modal-title" id="my-modal-title">Publicar Conselho Prático</h5>
                                 <button class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                            <form class="was-validated"  method="post" action="/video" enctype="multipart/form-data">
+                            <form class="was-validated"  method="post" action="/conselhopratico" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row row-cols-1">
                                     <div class="col"> 
-                                        <input type="text" id="titulo" placeholder="Introduza o título do video" name="titulo" class="form-control" required="">
-                                        <div class="valid-feedback"></div> 
-                                    </div>  
-                                </div> 
-                                <br>  
-                                <div class="row row-cols-1"> 
-                                <div class="col"> 
-                                    <label>Thumbnail</label>
-                                    <input accept="image/png, image/gif, image/jpeg" type="file" id="capa" placeholder="Capa do video" name="capa" class="form-control" required="">
-                                    <div class="valid-feedback"></div> 
-                                    <div class="invalid-feedback">Campo obrigatório.</div>
-                                </div>  
-                                </div> 
-                                  
-                                <div class="row row-cols-1"> 
-                                    <div class="col">
-                                        <label>Tipo link</label>
-                                        <select name="type" id="type" class="form-control"  aria-label="Default select example" required>
-                                             <option value="">- Escolha uma opção -</option>  
-                                            <option value="Youtube">Link youtube</option>
-                                            <option value="Outro">Outro</option> 
-                                        </select>
+                                        <input type="text" id="titulo" placeholder="Introduza o título" name="titulo" class="form-control" required="">
                                         <div class="valid-feedback"></div>
+                                        <div class="invalid-feedback">Campo obrigatório.</div>
+                                    </div>  
+                                </div>  
+                                <div class="row row-cols-2"> 
+                                    <div class="col"> 
+                                        <label>Imagem de capa</label>
+                                        <input accept="image/png, image/gif, image/jpeg" type="file" id="imagem" placeholder="Capa" name="imagem" class="form-control" required="">
+                                        <div class="va id-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
                                     </div>
-                                </div> 
-                                <div class="row row-cols-1"> 
-                                    <div class="col"> 
-                                        <label>Link</label>
-                                        <input type="text" id="link" placeholder="Introduza o link do video" name="link" class="form-control" required="" >
-                                        <div class="valid-feedback"></div> 
-                                    </div>  
-                                </div>
-                               <!-- <div class="row row-cols-1"> 
                                     <div class="col"> 
                                         <label>Anexo</label>
-                                        <input  accept="application/mp4, application/mov" type="file" id="anexo" placeholder="Anexo de video" name="anexo" class="form-control">
+                                        <input  accept="application/pdf" type="file" id="anexo" placeholder="Anexo" name="anexo" class="form-control">
                                         <div class="va id-feedback"></div> 
                                      </div> 
-                                </div> --> 
-                                <div class="row row-cols-1"> 
+                                </div>  
+                                <div class="row row-cols-2"> 
                                     <div class="col"> 
-                                        <label>Estado</label>
-                                        <select name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
-                                        <option value="">- Escolha uma opção -</option>  
-                                        <option value="Publicado">Publicar no Site</option>
-                                        <option value="Despublicado">Não Publicar</option>
-                                        </select>
+                                    <label>Estado</label>
+                                     <select name="estado" id="estado" class="form-control"  aria-label="Default select example" required="">
+                                     <option value="">- Escolha uma opção -</option>  
+                                     <option value="Publicado">Publicar no site</option>
+                                        <option value="Despublicado">Não publicar</option> 
+                                    </select>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback">Campo obrigatório.</div>
+                                    </div>  
+                                </div>   
+                                <div class="row row-cols-1">
+                                    <div class="col"> 
+                                        <label>Descrição</label>
+                                        <textarea id="descricao" name="descricao" class="form-control" rows="4" required=""></textarea>
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
                                     </div>  
-                                </div>    
+                                </div>
                                 <hr>
                                 <div id="modal-footer"> 
-                                    <button type="submit" class="btn btn-success"> <i class="fas fa-fw fa-save"></i> Submeter</button>
+                                    <button type="submit" class="btn btn-success"> <i class="fas fa-fw fa-save"></i> Salvar</button>
                                 </div>
                             </form> 
                             
@@ -120,28 +106,33 @@
                                 <thead>
                                     <tr> 
                                         <th>Id</th>
-                                        <th>Título</th> 
+                                        <th>Capa</th>
+                                        <th>Título</th>
                                         <th>Data Criação</th>
-                                        <th>Estado</th> 
+                                        <th>Estado</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($vide)
-                                        @foreach ($vide as $vid)
+                                    @if ($consels)
+                                        @foreach ($consels as $consel)
                                             <tr> 
-                                                <td>{{ $vid->id  }}</td>
-                                                <td>{{ $vid->titulo  }}</td> 
-                                                <td>{{ $vid->created_at}}</td>
+                                                <td>{{ $consel->id  }}</td>
+                                                <td style="width: 10%">
+                                                    <img src="{{ url("storage/conselhopratico/{$consel->imagem}")}}" 
+                                                    alt="{{ $consel->imagem }}" id="foto" class="card-img-top" /> </div>
+                                                </td>
+                                                <td>{{ $consel->titulo  }}</td>
+                                                <td>{{ $consel->created_at}}</td>
                                                 <td>
-                                                @if($vid->estado=="Publicado") 
-                                                    <span class="text-success">{{ $vid->estado}}</span>
+                                                @if($consel->estado=="Publicado") 
+                                                    <span class="text-success">{{ $consel->estado}}</span>
                                                     @else
-                                                    <span class="text-warning">{{ $vid->estado}}</span>
+                                                    <span class="text-warning">{{ $consel->estado}}</span>
                                                     @endif
-                                                </td> 
+                                                </td>
                                                 <td>
-                                                    <a href="{{ url('/video/' . $vid->id) }}"
+                                                    <a href="{{ url('/conselhopratico/' . $consel->id) }}"
                                                         class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>
                                                     </a> 
                                                 </td> 
@@ -160,8 +151,11 @@
     </div>  
     
       <style>
-        #my-modal{      
-        z-index: 10000000;
+        #search{ 
+            text-align:right;
+        }
+        #myInput{
+            width:50%;
         }
         #modal-body{
             color: #061536;
@@ -180,8 +174,11 @@
         #modal-footer{
             text-align: center; 
         }
+        #my-modal{      
+        z-index: 10000000;
+        }
     </style> 
-        
+     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
         crossorigin="anonymous">
@@ -208,5 +205,4 @@
       //  window.location.reload();
         }, 5000)
     </script>
- 
 @endsection

@@ -118,7 +118,7 @@ class PublicacoesController extends Controller
     
     public function destroy($id)
     {
-        Legislacao::destroy($id); 
+        Publicacoes::destroy($id); 
         return redirect('/publicacoes')->with('message','Publicação apagada com sucesso!');
     }
 

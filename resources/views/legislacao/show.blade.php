@@ -21,11 +21,11 @@
          
         @if($leis->estado =='Publicado')
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#unpublish">
-            <i class="fas fa-fw fa-download"></i> Despublicar
+            <i class="fas fa-fw fa-eye-slash"></i> Despublicar
         </button> 
         @else
         <button class="btn btn-info" type="button" data-toggle="modal" data-target="#publish">
-            <i class="fas fa-fw fa-upload"></i> Publicar
+            <i class="fas fa-fw fa-eye"></i> Publicar
         </button> 
         @endif
         

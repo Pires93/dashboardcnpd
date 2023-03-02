@@ -142,7 +142,14 @@
                                                 <td>{{ $user->name  }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->typeUser }}</td>
-                                                <td>{{ $user->estado}}</td>
+                                                <td>
+                                                 @if($user->estado=="Ativo") 
+                                                    <span class="text-success">{{ $user->estado}}</span>
+                                                    @else
+                                                    <span class="text-warning">{{ $user->estado}}</span>
+                                                    @endif
+                                                </td> 
+                                                </td>
                                                 <td>
                                                     <a href="{{ url('/users/' . $user->id) }}"
                                                         class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>

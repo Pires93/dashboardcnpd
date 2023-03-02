@@ -69,6 +69,7 @@ class GeolocalizacaoController extends Controller
           $pedidos->parecer_representante_trabalhadores=$nameBd;
         }    
         $pedidos->estado="Novo";
+        $pedidos->tipo="GPS";
         $pedidos->created_at=date('Y-m-d H:i:s');
         $pedidos->save();
 

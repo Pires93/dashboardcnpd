@@ -28,7 +28,7 @@
                                         <th>ID</th>
                                         <th>Entidade</th>
                                         <th>Data Envio</th>
-                                        <th>tubim</th>
+                                        <th>Estado</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -39,7 +39,13 @@
                                                 <td>{{ $pedido->id }}</td>
                                                 <td>{{ $pedido->nome_denominacao  }}</td>
                                                 <td>{{ $pedido->created_at}}</td>
-                                                <td>{{ $pedido->email_pessoa_representante_instalacao}}</td>
+                                                <td>
+                                                    @if($pedido->estado=="Novo") 
+                                                    <span class="text-warning">{{ $pedido->estado}}</span>
+                                                    @else
+                                                    <span class="text-success">{{ $pedido->estado}}</span>
+                                                    @endif
+                                                </td>
                                                 <td style="text-align: center">
                                                     <a href="{{ url('/videovigilancia/' . $pedido->id) }}"
                                                         class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>

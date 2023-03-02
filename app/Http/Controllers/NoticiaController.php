@@ -50,16 +50,21 @@ class NoticiaController extends Controller
     public function update(Request $request, $id)
     {
         $news = Noticia::find($id);
-        $update=$request->all();
-        $news->updated_at=date('Y-m-d H:i:s'); 
+        $news->updated_at=date('Y-m-d H:i:s');  
+        $news->titulo=$request->titulo;
+        $news->subtitulo=$request->subtitulo;
+        $news->autor=$request->autor;
         $news->conteudo=$request->conteudo;
+        $news->type=$request->type;
+        $news->estado = $request->estado;  
+        
         if($request->capa) {
             $capaname = $request->capa;
             $nameBd=now().'.'.$request->capa->extension(); 
           $capaname = $request->capa->storeAs('capanoticia',$nameBd);//renomear noime da imagem na pasta 
           $news->imagem=$nameBd;
         }  
-        $news->update($update);
+        $news->save();
 
         return back()->with('message','Notícia editada com sucesso!');
     }

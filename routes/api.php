@@ -12,6 +12,9 @@ use App\Http\Controllers\VideovigilanciaController;
 use App\Http\Controllers\QueixaController;
 use App\Http\Controllers\PublicacoesController;
 use App\Http\Controllers\VideoController; 
+use App\Http\Controllers\ConselhospraticoController; 
+
+
  
 //API PARA ALIMENTAR SITE
 
@@ -43,6 +46,15 @@ Route::get('listarNoticias', [NoticiaController::class,'ListarTodasApi']);
 Route::get('/noticia/{id}', [NoticiaController::class, 'listarApiId']);
 Route::get('/ultimosEventos', [NoticiaController::class, 'listarUltimos3']);
 Route::get('/ultimaNoticia', [NoticiaController::class, 'ultimaNoticia']);
+
+//CONSELHOS PRATICOS
+ 
+Route::get('listarConselhos', [ConselhospraticoController::class,'ListarTodasApi']);
+Route::get('/conselho/{id}', [ConselhospraticoController::class, 'listarApiId']);
+Route::get('/ultimosConselhos', [ConselhospraticoController::class, 'listarUltimos5']); 
+
+
+
 
 //NOVOS FORMS VINDO DE SITE
 Route::post('contatos/store', [PedidoInformacaoController::class,'store']);

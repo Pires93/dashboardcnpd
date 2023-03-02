@@ -110,7 +110,13 @@
                                                 <td>{{ $lei->id  }}</td>
                                                 <td>{{ $lei->titulo  }}</td>
                                                 <td>{{ $lei->created_at}}</td>
-                                                <td>{{ $lei->estado}}</td>
+                                                <td>
+                                                @if($lei->estado=="Publicado") 
+                                                    <span class="text-success">{{ $lei->estado}}</span>
+                                                    @else
+                                                    <span class="text-warning">{{ $lei->estado}}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a href="{{ url('/legislacao/' . $lei->id) }}"
                                                         class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>

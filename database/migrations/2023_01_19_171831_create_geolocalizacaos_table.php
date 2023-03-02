@@ -62,6 +62,7 @@ return new class extends Migration
             $table->text('medidas_fisicas_seguranca')->nullable();
             $table->text('medidas_logicas_seguranca')->nullable();
             $table->string('parecer_representante_trabalhadores')->nullable();
+            $table->string('tipo')->nullable();
             $table->string('estado')->nullable();
         });
     }

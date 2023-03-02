@@ -124,6 +124,7 @@
                                 <thead>
                                     <tr> 
                                         <th>Id</th>
+                                        <th>Capa</th>
                                         <th>Título</th>
                                         <th>Data Criação</th>
                                         <th>Estado</th>
@@ -135,9 +136,19 @@
                                         @foreach ($news as $new)
                                             <tr> 
                                                 <td>{{ $new->id  }}</td>
+                                                <td style="width: 10%">
+                                                    <img src="{{ url("storage/capanoticia/{$new->imagem}")}}" 
+                                                    alt="{{ $new->imagem }}" id="foto" class="card-img-top" /> </div>
+                                                </td>
                                                 <td>{{ $new->titulo  }}</td>
                                                 <td>{{ $new->created_at}}</td>
-                                                <td>{{ $new->estado  }}</td>
+                                                <td>
+                                                @if($new->estado=="Publicado") 
+                                                    <span class="text-success">{{ $new->estado}}</span>
+                                                    @else
+                                                    <span class="text-warning">{{ $new->estado}}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a href="{{ url('/noticia/' . $new->id) }}"
                                                         class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>
