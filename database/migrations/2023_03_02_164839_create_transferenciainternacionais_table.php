@@ -13,17 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('finalidadetratamentos', function (Blueprint $table) {
+        Schema::create('transferenciainternacionais', function (Blueprint $table) {
             $table->id();
             $table->integer('idForm')->nullable();
-            $table->json('categorias_finalidade')->nullable();
-            $table->json('finalidades')->nullable();
-            
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->string('entidades')->nullable();
+            $table->string('pais')->nullable();
+            $table->text('dados_transferidos')->nullable();
+            $table->text('fundamento')->nullable();
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
         });
     }
-
+ 
     /**
      * Reverse the migrations.
      *
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('finalidadetratamentos');
+        Schema::dropIfExists('transferenciainternacionais');
     }
 };

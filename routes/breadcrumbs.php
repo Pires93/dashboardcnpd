@@ -13,6 +13,9 @@ use App\Models\Publicacoes;
 use App\Models\Video;
 use App\Models\Sidebar;
 use App\Models\user;
+use App\Models\Tic;
+use App\Models\Geral;
+use App\Models\Biometria;
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
@@ -98,6 +101,47 @@ Breadcrumbs::for('Ver Interconexão', function (BreadcrumbTrail $trail, Intercon
     $trail->parent('Formulários Interconexão', route('interconexao.index'));
     $trail->push("Formulário Interconexão ID - ".$pedido->id, route('show', $pedido));
 });
+
+
+//******************************************Biometria****************************************** */
+// LISTA TODOS BIOMETRIA
+Breadcrumbs::for('Formulários Biometria', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Formulários Biometria', route('biometria.index'));
+});
+
+//MOSTRAR id
+Breadcrumbs::for('Ver Biometria', function (BreadcrumbTrail $trail, Biometria $pedido) {
+    $trail->parent('Formulários Biometria', route('biometria.index'));
+    $trail->push("Formulário Biometria ID - ".$pedido->id, route('show', $pedido));
+});
+
+//******************************************TIC****************************************** */
+// LISTA TODOS TICS
+Breadcrumbs::for('Formulários TIC', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Formulários TIC', route('tic.index'));
+});
+
+//MOSTRAR id
+Breadcrumbs::for('Ver TIC', function (BreadcrumbTrail $trail, Tic $pedido) {
+    $trail->parent('Formulários Biometria', route('tic.index'));
+    $trail->push("Formulário TIC ID - ".$pedido->id, route('show', $pedido));
+});
+
+//******************************************GERAl****************************************** */
+// LISTA TODOS TICS
+Breadcrumbs::for('Formulários GERAL', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Formulários GERAL', route('geral.index'));
+});
+
+//MOSTRAR id
+Breadcrumbs::for('Ver GERAL', function (BreadcrumbTrail $trail, Geral $pedido) {
+    $trail->parent('Formulários GERAL', route('geral.index'));
+    $trail->push("Formulário GERAL ID - ".$pedido->id, route('show', $pedido));
+});
+
 /******************************************NOTICIAS****************************************** */
 // LISTA TODOS AS NOTICIAS
 Breadcrumbs::for('Notícias', function ($trail) {
