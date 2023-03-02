@@ -26,7 +26,10 @@ class HomeController extends Controller
         $countA = DB::table('videovigilancias')->count();
         $countB = DB::table('geolocalizacaos')->count();
         $countC = DB::table('interconexaos')->count();
-        $countTotal = $countA + $countB + $countC; 
+        $countD = DB::table('gerals')->count();
+        $countE = DB::table('tics')->count();
+        $countF = DB::table('biometrias')->count();
+        $countTotal = $countA + $countB + $countC + $countD + $countE + $countF; 
  
         return view('home')->with('countTotal',$countTotal);
     }

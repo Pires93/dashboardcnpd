@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comunicacaoterceiros', function (Blueprint $table) {
-            $table->id();
+        Schema::create('dados_contido_em_cada_registros', function (Blueprint $table) {
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
             $table->integer('idForm')->nullable();
-            $table->text('entidades_comunicadas')->nullable();
-            $table->text('condicoes_comunicacao')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->string('categorias')->nullable();
+            $table->string('finalidades')->nullable();
+
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comunicacaoterceiros');
+        Schema::dropIfExists('dados_contido_em_cada_registros');
     }
 };

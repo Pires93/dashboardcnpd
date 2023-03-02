@@ -12,9 +12,6 @@ use App\Http\Controllers\VideovigilanciaController;
 use App\Http\Controllers\QueixaController;
 use App\Http\Controllers\PublicacoesController;
 use App\Http\Controllers\VideoController; 
-use App\Http\Controllers\ConselhospraticoController; 
-
-
  
 //API PARA ALIMENTAR SITE
 
@@ -62,3 +59,11 @@ Route::post('videovigilancia/create', [VideovigilanciaController::class,'create'
 Route::post('geolocalizacao/create', [GeolocalizacaoController::class,'create']);
 Route::post('interconexao/create', [InterconexaoController::class,'create']);
 Route::post('queixa/create', [QueixaController::class,'create']);
+
+Route::post('biometria/store', [BiometriaController::class,'store']);
+
+
+Route::post('geral/store', [GeralController::class, 'store']);
+
+
+Route::post('tic/store', [TicController::class, 'store']);

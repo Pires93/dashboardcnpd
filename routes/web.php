@@ -51,6 +51,19 @@ Route::get('/geolocalizacao/{id}', [GeolocalizacaoController::class, 'show'])->n
 Route::resource("/interconexao",InterconexaoController::class)->middleware('auth');
 Route::get('/interconexao/{id}', [InterconexaoController::class, 'show'])->name('show')->middleware('auth');
 
+//BIOMETRIA ROUTES
+Route::resource("/biometria",BiometriaController::class)->middleware('auth');
+Route::get('/biometria/{id}', [BiometriaController::class, 'show'])->name('show')->middleware('auth');
+
+//TIC ROUTES
+Route::resource("/tic",TicController::class)->middleware('auth');
+Route::get('/tic/{id}', [TicController::class, 'show'])->name('show')->middleware('auth');
+
+//GERAL ROUTES
+Route::resource("/geral",GeralController::class)->middleware('auth');
+Route::get('/geral/{id}', [GeralController::class, 'show'])->name('show')->middleware('auth');
+
+
 //NOTICIA ROUTES 
 Route::resource("/noticia",NoticiaController::class)->middleware('auth'); 
 Route::post('/noticia', [NoticiaController::class, 'store'])->name('index')->middleware('auth');
@@ -58,6 +71,7 @@ Route::get('/deleten/{id}', [NoticiaController::class, 'destroy'])->name('index'
 Route::get('/unpublishn/{id}', [NoticiaController::class, 'unpublishn'])->name('index')->middleware('auth');
 Route::get('/publishn/{id}', [NoticiaController::class, 'publishn'])->name('index')->middleware('auth');
  
+
 
 //LEGISLACAO ROUTES 
 Route::resource("/legislacao",LegislacaoController::class)->middleware('auth'); 

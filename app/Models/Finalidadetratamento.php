@@ -19,6 +19,9 @@ class Finalidadetratamento extends Model
     public function forms(){
         return $this->hasOne('App\Models\Interconexao');
     }
+    public function formsGeral(){
+        return $this->hasOne('App\Models\Geral');
+    }
 
 
     protected $casts = [
