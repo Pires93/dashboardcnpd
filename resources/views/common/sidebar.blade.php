@@ -76,6 +76,8 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
+            
+
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-cog"></i>
@@ -83,7 +85,9 @@
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded"> 
-            <?php
+            <?php 
+
+           
             $menus = Sidebar::where(['estado'=>'Ativo','type'=>'Gestao'])->orderBy('titulo', 'ASC')->get();
              foreach ($menus as $menu) 
                 {
@@ -93,7 +97,8 @@
                     <a class="collapse-item" href="{{ route("$menu->url") }}">
                     <i class="{{ $menu->icon }}"></i>
                         {{ $menu->titulo }}
-                    </a>  
+                    </a> 
+                   
                 <?php  
                 } 
                 ?> 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Noticia;
+use App\Models\Log;
 class NoticiaController extends Controller
 {
      
@@ -34,6 +35,18 @@ class NoticiaController extends Controller
         $news->estado = $request->estado;  
         $news->created_at=date('Y-m-d H:i:s');
         $news->save();
+
+        //log do User
+
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        $log->id_evento = $news->id;
+        $log->action = 'Criar Noticia';
+        $log->tipo_evento = "Notícia";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
 
         return redirect('/noticia')->with('message','Notícia publicada com sucesso!');
     }
@@ -66,6 +79,18 @@ class NoticiaController extends Controller
         }  
         $news->save();
 
+        //log user
+
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        $log->id_evento = $news->id;
+        $log->action = 'Noticia Alterado';
+        $log->tipo_evento = "Notícia";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
+
         return back()->with('message','Notícia editada com sucesso!');
     }
 
@@ -76,18 +101,43 @@ class NoticiaController extends Controller
         return redirect('/noticia')->with('message','Notícia apagada com sucesso!');
     }
     
-    public function unpublishn($id)
+    public function unpublishn($id, Request $request)
     {
         $news = Noticia::find($id);
         $news->estado="Despublicado";
         $news->save();
+
+        //log user   //log user
+
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->id_evento = $news->id;
+        $log->action = 'Desbuplicar';
+        $log->user_name = auth()->user()->name;
+        $log->tipo_evento = "Notícia";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
         return back()->with('message','Notícia despublicada com sucesso!');
     } 
-    public function publishn($id)
+    public function publishn(Request $request, $id)
     {
         $news = Noticia::find($id);
         $news->estado="Publicado";
         $news->save();
+
+        //user log
+
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->id_evento = $news->id;
+        $log->action = 'Desbuplicar';
+        $log->user_name = auth()->user()->name;
+        $log->tipo_evento = "Notícia";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
+
         return back()->with('message','Notícia publicada com sucesso!');
     } 
 
@@ -100,13 +150,13 @@ class NoticiaController extends Controller
     }
     public function listarUltimos3()//pegar ultimos 3 ids
     { 
-        return Noticia::limit(3)->latest()->orderBy('id', 'DESC')->get();
+        $leis =  Noticia::limit(3)->latest()->orderBy('id', 'DESC')->get();
         return response($leis,200);
     }
 
     public function ultimaNoticia() //pegar ultimo id
     { 
-        return Noticia::latest()->get();
+        $leis = Noticia::latest()->get();
         return response($leis,200); 
     }
 

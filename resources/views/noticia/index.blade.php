@@ -169,6 +169,10 @@
     </div>  
     
       <style>
+         #foto{
+            height:50px;
+            width:50px;
+        }
         #search{ 
             text-align:right;
         }

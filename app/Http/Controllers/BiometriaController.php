@@ -87,7 +87,8 @@ class BiometriaController extends Controller
         $pedidos->medidade_seguranca_fisica=$request->medidade_seguranca_fisica;
         $pedidos->medidas_seguranca_logica=$request->medidas_seguranca_logica;
         $pedidos->created_at = date('Y-m-d H:i:s');
-
+        $pedidos->estado =  'Novo'; 
+        $pedidos->tipo =  'Biometria';     
         if($request->parecer_representante_trabalhadore) { 
             $nameBd=now().'.'.$request->parecer_representante_trabalhadore->extension(); 
           $capaname = $request->parecer_representante_trabalhadore->storeAs('parecerTrabalhadores',$nameBd);//renomear noime da imagem na pasta 

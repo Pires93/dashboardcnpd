@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('fundamento')->nullable();
             $table->string('created_at')->nullable();
             $table->string('updated_at')->nullable();
+            $table->string('tipoform')->nullable();
         });
     }
  

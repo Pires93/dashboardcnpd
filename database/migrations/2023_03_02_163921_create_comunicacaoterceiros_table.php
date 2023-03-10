@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('dados_transferidos')->nullable();
             $table->string('created_at')->nullable();
             $table->string('updated_at')->nullable();
+            $table->string('tipoform')->nullable();
         });
     }
 

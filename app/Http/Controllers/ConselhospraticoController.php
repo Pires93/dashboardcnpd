@@ -107,7 +107,7 @@ class ConselhospraticoController extends Controller
     }
     public function listarUltimos5()//pegar ultimos 3 ids
     { 
-        return Conselhospratico::limit(5)->latest()->orderBy('id', 'DESC')->get();
+        $leis = Conselhospratico::limit(5)->latest()->orderBy('id', 'DESC')->get();
         return response($leis,200);
     }
     public function listarApiId($id)//pegar um id

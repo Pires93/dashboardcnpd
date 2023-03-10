@@ -16,6 +16,7 @@ class Transferenciainternacional extends Model
         'pais',
         'dados_transferidos',
         'fundamento',
+        'tipoform'
     ];
 
     public function forms(){

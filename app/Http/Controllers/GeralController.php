@@ -93,6 +93,8 @@ class GeralController extends Controller
        $pedidos->outrasformas_direito_acesso=$request->outrasformas_direito_acesso;
         $pedidos->medidade_seguranca_fisica=$request->medidade_seguranca_fisica;
         $pedidos->medidas_seguranca_logica=$request->medidas_seguranca_logica;
+        $pedidos->estado="Novo";
+        $pedidos->tipo="Geral";
         $pedidos->created_at = date('Y-m-d H:i:s');
         
        
@@ -117,6 +119,7 @@ class GeralController extends Controller
                 $finalidade->idForm = $pedidos->id;
                 $finalidade->finalidades = $dataF['finalidade'];  
                 $finalidade->created_at = date('Y-m-d H:i:s');
+                $finalidade->tipoform = 'Geral';
                
             }
             
@@ -135,6 +138,7 @@ class GeralController extends Controller
                     $comunicacao->dados_transferidos = $dataC['dadosTransferidos'];
                     $comunicacao->idForm = $pedidos->id;
                     $comunicacao->created_at = date('Y-m-d H:i:s');
+                    $comunicacao->tipoform = 'Geral';
                     
                    
             }
@@ -156,6 +160,7 @@ class GeralController extends Controller
                 $transferencia->fundamento  = $dataC['fundamento'];
                 $transferencia->idForm = $pedidos->id;
                 $transferencia->created_at = date('Y-m-d H:i:s');
+                $transferencia->tipoform = 'Geral';
             
         }
             $transferencia->save();

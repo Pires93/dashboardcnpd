@@ -8,11 +8,15 @@ use App\Models\Videovigilancia;
 use App\Models\Geolocalizacao;
 use App\Models\Interconexao;
 use App\Models\Noticia;
+use App\Models\Geral;
+use App\Models\Biometria;
+use App\Models\Tic;
 use App\Models\Legislacao;
 use App\Models\Publicacoes;
 use App\Models\Video;
 use App\Models\Sidebar;
 use App\Models\user;
+use App\Models\Conselhospratico;
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
 

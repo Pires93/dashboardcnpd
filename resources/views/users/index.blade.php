@@ -171,8 +171,8 @@
     
       <style>
         #foto{
-            height:50%;
-            width:50%;
+            height:50px;
+            width:50px;
         }
         #my-modal{      
         z-index: 10000000;

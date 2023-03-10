@@ -83,7 +83,7 @@
                                 <hr>
                                 
                                 <div id="modal-footer">
-                                <a href="/delete/{{ $user->id}}"
+                                <a href="/deleteu/{{ $user->id}}"
                                     class="btn btn-danger"> <i class="fas fa-trash"> Remover</i>
                                 </a>  
                                 </div>

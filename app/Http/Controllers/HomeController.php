@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Log;
 class HomeController extends Controller
 {
     /**
@@ -35,14 +36,22 @@ class HomeController extends Controller
     }
 
     
-    public function login()
+    public function login(Request $request)
     {
         $countA = DB::table('videovigilancias')->count();
         $countB = DB::table('geolocalizacaos')->count();
         $countC = DB::table('interconexaos')->count();
         $countTotal = $countA + $countB + $countC; 
+
+       //$log = new Log;
+        //$log->user_id = auth()->user()->id;
+       // $log->action = 'Login in';
+      /*  $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();*/
  
         return view('home')->with('countTotal',$countTotal);
+
     }
 
 

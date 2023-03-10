@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
-
+use App\Models\Log;
 
 class UserController extends Controller
 {
@@ -57,6 +57,16 @@ class UserController extends Controller
           $capaname = $request->foto->storeAs('users',$nameBd); 
           $user->foto=$nameBd;
         } 
+
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        //$log->id_evento = $news->id;
+        $log->action = 'Criar User';
+        $log->tipo_evento = "User";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
         $user->save();
 
         return redirect('/users');
@@ -88,21 +98,47 @@ class UserController extends Controller
           $capaname = $request->foto->storeAs('users',$nameBd); 
           $user->foto=$nameBd;
         }   
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        //$log->id_evento = $news->id;
+        $log->action = 'Atualizar User';
+        $log->tipo_evento = "User";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
         $user->save();
         return back()->with('message','User editado com sucesso!');
     }
 
      
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         User::destroy($id);  
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        //$log->id_evento = $news->id;
+        $log->action = 'Eliminar User';
+        $log->tipo_evento = "User";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+
         return redirect('/users')->with('message','User removido com sucesso!');
     }
 
-    public function desativar($id)
+    public function desativar(Request $request,$id)
     {
-        $user = User::find($id);
+        $user = User::find( $id);
         $user->estado="Inativo";
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        //$log->id_evento = $news->id;
+        $log->action = 'Desativar User';  
+        $log->tipo_evento = "User";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
         $user->save();
         return back()->with('message','User desativado com sucesso!');
     } 

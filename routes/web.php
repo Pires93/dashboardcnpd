@@ -32,7 +32,7 @@ Route::get('/pedidoInformacao/{id}', [PedidoInformacaoController::class, 'show']
 //USERS ROUTES
 Route::resource("/users",UserController::class)->middleware('auth');
 Route::post('/users', [UserController::class, 'store'])->name('index')->middleware('auth');
-Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/deleteu/{id}', [UserController::class, 'destroy'])->name('user.destroy')->middleware('auth');
 Route::get('/desativar/{id}', [UserController::class, 'desativar'])->name('index')->middleware('auth');
 Route::get('/ativar/{id}', [UserController::class, 'ativar'])->name('index')->middleware('auth');
 Route::get('/users/{profile}',[UserController::class, 'profile'])->name('users.profile');
@@ -104,7 +104,7 @@ Route::get('/habilitar/{id}', [SidebarController::class, 'habilitar'])->name('in
  
  //CONSELHOS PRATICOS ROUTES 
 Route::resource("/conselhopratico",ConselhospraticoController::class)->middleware('auth'); 
-Route::post('/noticia', [ConselhospraticoController::class, 'store'])->name('index')->middleware('auth');
+Route::post('/conselhopratico', [ConselhospraticoController::class, 'store'])->name('index')->middleware('auth');
 Route::get('/delete/{id}', [ConselhospraticoController::class, 'destroy'])->name('index')->middleware('auth');
 Route::get('/unpublish/{id}', [ConselhospraticoController::class, 'unpublish'])->name('index')->middleware('auth');
 Route::get('/publish/{id}', [ConselhospraticoController::class, 'publish'])->name('index')->middleware('auth');

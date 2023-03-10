@@ -14,6 +14,7 @@ class Finalidadetratamento extends Model
         'idForm',
         'categorias_finalidade',
         'finalidades',
+        'tipoform'
     ];
 
     public function forms(){

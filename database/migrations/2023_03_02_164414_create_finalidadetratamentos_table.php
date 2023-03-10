@@ -20,6 +20,8 @@ return new class extends Migration
             $table->json('finalidades')->nullable();
             $table->string('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->string('tipoform')->nullable();
+
         });
     }
 

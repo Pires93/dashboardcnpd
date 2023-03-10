@@ -12,6 +12,9 @@ use App\Http\Controllers\VideovigilanciaController;
 use App\Http\Controllers\QueixaController;
 use App\Http\Controllers\PublicacoesController;
 use App\Http\Controllers\VideoController; 
+use App\Http\Controllers\BiometriaController;
+use App\Http\Controllers\GeralController;
+use App\Http\Controllers\TicController;
  
 //API PARA ALIMENTAR SITE
 

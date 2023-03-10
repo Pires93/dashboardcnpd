@@ -14,7 +14,8 @@ class Comunicacaoterceiro extends Model
         'idForm',
         'entidades_comunicadas',
         'condicoes_comunicacao',
-        'dados_transferidos'
+        'dados_transferidos',
+        'tipoform'
     ];
 
     public function forms(){
