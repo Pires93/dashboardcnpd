@@ -18,6 +18,7 @@ use App\Models\Sidebar;
 use App\Models\user;
 use App\Models\Conselhospratico;
 use App\Models\Role_User;
+use App\Models\Log;
 
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -262,8 +263,8 @@ Breadcrumbs::for('Logs', function ($trail) {
     $trail->push('Logs', route('logssystem.index'));
 });
 //MOSTRAR id
-Breadcrumbs::for('Ver Logs', function (BreadcrumbTrail $trail, Role_User $upermission) {
+Breadcrumbs::for('Ver Logs', function (BreadcrumbTrail $trail, Log $log) {
     $trail->parent('Logs', route('logssystem.index'));
-    $trail->push("Log ID - ".$upermission->id, route('show', $upermission));
+    $trail->push("Log ID - ".$log->id, route('show', $log));
 });
 ?> 
