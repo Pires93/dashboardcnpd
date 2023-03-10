@@ -6,14 +6,19 @@ use App\Models\Legislacao;
 use Illuminate\Http\Request; 
 use Datatables;
 
+use Illuminate\Support\Facades\Gate;
 class LegislacaoController extends Controller
 {
 
     public function index()
     {
-        $leis = Legislacao::orderBy('created_at')->get(); 
-        return view('legislacao.index')->with('leis',$leis);
-       
+        if (Gate::allows('admin-manager')) {
+            $leis = Legislacao::orderBy('created_at')->get(); 
+            return view('legislacao.index')->with('leis',$leis);
+        }else{
+            //abort(403);
+            return back()->with('alerta','Sem permisão!');
+        } 
     } 
 
 

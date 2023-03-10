@@ -11,7 +11,8 @@ use App\Http\Controllers\PedidoInformacaoController;
 use App\Http\Controllers\VideovigilanciaController;
 use App\Http\Controllers\QueixaController;
 use App\Http\Controllers\PublicacoesController;
-use App\Http\Controllers\VideoController; 
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\ConselhospraticoController;  
  
 //API PARA ALIMENTAR SITE
 

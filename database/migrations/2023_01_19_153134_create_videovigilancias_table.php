@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('videovigilancias', function (Blueprint $table) {
             $table->id(); 
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
             $table->string('finalidade_cctv')->nullable();
             $table->string('tipo_notificacao')->nullable();
             $table->string('tipo_cctv')->nullable();

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
+use App\Models\Role_User;
 
 
 class UserController extends Controller
@@ -13,8 +16,17 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
-        return view('users.index')->with('users',$users);
+        if (Gate::allows('admin-manager')) {
+            
+            $users = User::all(); 
+            $roles = Role::all();  
+            return view('users.index')
+            ->with('users',$users) 
+            ->with('roles',$roles);
+        }else{
+            //abort(403);
+            return back()->with('alerta','Sem permisão!');
+        } 
     }
 
    /* public function profile(User $profile){
@@ -24,10 +36,11 @@ class UserController extends Controller
     }*/
 
     public function profile($id)
-    {
-        $users = User::whereId($id);
+    {   
+        $users = User::whereId($id); 
         return view('users.profile')->with('users', $users);
-    }
+   
+   }
 
    /* protected function create(array $data)
     {
@@ -56,17 +69,31 @@ class UserController extends Controller
             $nameBd=now().'.'.$request->foto->extension(); 
           $capaname = $request->foto->storeAs('users',$nameBd); 
           $user->foto=$nameBd;
-        } 
+        }  
         $user->save();
 
-        return redirect('/users');
+        $ru= new Role_User();
+        $ru->user_id=$user->id;
+        $ruser = Role::where('name',$request->typeUser)->get();
+        foreach($ruser as $ruse){ 
+            $ru->role_id=$ruse['id'];
+        }
+        $ru->created_at=date('Y-m-d H:i:s');
+        $ru->save();
+
+        return redirect('/users')->with('message','User registado com sucesso!');
     }
 
 
     public function show($id)
     {
-        $user = User::find($id); 
-        return view('users.profile')->with('user',$user);
+
+         $roles = Role::all(); 
+         $user = User::find($id); 
+         return view('users.profile')
+             ->with('user',$user)
+             ->with('roles',$roles);
+         
     }
 
     public function edit($id)

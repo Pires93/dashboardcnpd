@@ -20,10 +20,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('estado')->nullable();
             $table->string('foto')->nullable();
-            $table->string('password');
+            $table->string('password'); 
+            $table->string('typeUser')->nullable();
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
             $table->rememberToken(); 
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

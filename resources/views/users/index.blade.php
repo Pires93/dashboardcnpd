@@ -22,6 +22,14 @@
                     </div>  
                     
                 @endif
+
+                @if(session('alerta')) 
+                    <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Opss!</h4>
+                    <p>{{ session('alerta')}}</p>
+                    </div>  
+                    
+                @endif
                 
 
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -29,12 +37,12 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                 <!-- Large modal -->
-                <div class="nova">
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#my-modal">
-                    <i class="fas fa-fw fa-plus"></i> Novo 
-                    </button>
-                </div>
+                 <!-- Large modal --> 
+                    <div class="nova">
+                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#my-modal">
+                        <i class="fas fa-fw fa-plus"></i> Novo 
+                        </button>
+                    </div> 
                 <div id="my-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -79,13 +87,11 @@
                                         <label>Tipo User</label>
                                         <select name="typeUser" id="typeUser" class="form-control"  aria-label="Default select example" required="">
                                         <option value="">- Escolha uma opção -</option>  
-                                        <option value="Administrator">Administrator</option>
-                                            <option value="Presidente">Presidente</option> 
-                                            <option value="Membro">Membro</option> 
-                                            <option value="Jurista">Jurista</option> 
-                                            <option value="Informatico">Informaático</option> 
-                                            <option value="Secretario">Secretário</option> 
-                                            <option value="Assistente">Assistente</option>  
+                                        @if($roles)
+                                            @foreach($roles as $role)
+                                            <option value="{{$role->name}}">{{$role->name}}</option>  
+                                            @endforeach
+                                        @endif
                                         </select>
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
@@ -99,7 +105,7 @@
                                         </select>
                                         <div class="valid-feedback"></div>
                                         <div class="invalid-feedback">Campo obrigatório.</div>
-                                    </div>   
+                                    </div>  
                                 </div>  
                                 
                                 <hr>
@@ -123,8 +129,7 @@
                                     <tr> 
                                         <th>Id</th>
                                         <th>Foto</th>
-                                        <th>Name</th>
-                                        <th>Email</th> 
+                                        <th>Name</th> 
                                         <th>Tipo</th>
                                         <th>Estado</th>
                                         <th>Actions</th>
@@ -139,8 +144,7 @@
                                                     <img src="{{ url("storage/users/{$user->foto}")}}" 
                                                     alt="{{ $user->foto }}" id="foto" class="card-img-top" /> </div>
                                                 </td>
-                                                <td>{{ $user->name  }}</td>
-                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->name  }}</td> 
                                                 <td>{{ $user->typeUser }}</td>
                                                 <td>
                                                  @if($user->estado=="Ativo") 
@@ -150,10 +154,11 @@
                                                     @endif
                                                 </td> 
                                                 </td>
-                                                <td>
+                                                <td> 
                                                     <a href="{{ url('/users/' . $user->id) }}"
                                                         class="btn btn-primary btn-circle"> <i class="fas fa-eye"></i>
-                                                    </a> 
+                                                    </a>  
+                                                    
                                                 </td> 
                                             </tr>
                                         @endforeach

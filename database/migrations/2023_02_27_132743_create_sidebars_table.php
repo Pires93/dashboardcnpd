@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('estado')->nullable(); 
             $table->string('url')->nullable(); 
             $table->string('type')->nullable(); 
-            $table->timestamp('created_at')->useCurrent()->nullable(); 
-            $table->timestamp('updated_at')->useCurrent()->nullable(); 
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
         });
     }
 

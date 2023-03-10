@@ -28,8 +28,8 @@ return new class extends Migration
             $table->text('descricao_queixa')->nullable();
             $table->string('anexo_queixa')->nullable();
             $table->string('estado')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
         });
     }
 

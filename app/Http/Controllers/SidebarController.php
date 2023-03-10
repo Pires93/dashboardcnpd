@@ -5,13 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Sidebar;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Gate;
 class SidebarController extends Controller
 {
      
     public function index()
     { 
-        $side = Sidebar::orderBy('created_at')->get();
-        return view('sidebar.index')->with('side',$side);
+        
+        if (Gate::allows('admin-manager')) {
+            $side = Sidebar::orderBy('created_at')->get();
+            return view('sidebar.index')->with('side',$side);
+            
+        }else{
+            //abort(403);
+            return back()->with('alerta','Sem permisão!');
+        } 
     }
 
      

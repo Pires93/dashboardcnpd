@@ -16,23 +16,29 @@
      
         <div class="nova"> 
             </button>
-            <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit">
-            <i class="fas fa-fw fa-edit"></i> Editar 
+            @if(Auth::id()==$user->id) 
+            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#password">
+            <i class="fas fa-fw fa-key"></i> Change Passsword 
             </button>
-            
-            @if($user->estado =='Ativo')
-            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#unpublish">
-                <i class="fas fa-fw fa-eye-slash"></i> Desativar
-            </button> 
-            @else
-            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#publish">
-                <i class="fas fa-fw fa-eye"></i> Ativar
-            </button> 
             @endif
-        
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#apagar">
-            <i class="fas fa-fw fa-trash"></i> Delete 
-            </button>
+            @can('admin-manager')
+                <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit">
+                <i class="fas fa-fw fa-edit"></i> Editar 
+                </button>
+                @if($user->estado =='Ativo')
+                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#unpublish">
+                    <i class="fas fa-fw fa-eye-slash"></i> Desativar
+                </button> 
+                @else
+                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#publish">
+                    <i class="fas fa-fw fa-eye"></i> Ativar
+                </button> 
+                @endif
+            
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#apagar">
+                <i class="fas fa-fw fa-trash"></i> Delete 
+                </button>
+            @endcan
         </div>
                     
         <div class="row" id="geral">  
@@ -83,7 +89,7 @@
                                 <hr>
                                 
                                 <div id="modal-footer">
-                                <a href="/delete/{{ $user->id}}"
+                                <a href="/deleteu/{{ $user->id}}"
                                     class="btn btn-danger"> <i class="fas fa-trash"> Remover</i>
                                 </a>  
                                 </div>
@@ -204,15 +210,13 @@
                             <div class="row row-cols-2"> 
                                 <div class="col"> 
                                     <label>Tipo User</label>
-                                    <select name="typeUser"  value="{{ $user->typeUser }}" id="typeUser" class="form-control"  aria-label="Default select example" required="">
+                                    <select name="typeUser" id="typeUser" class="form-control"  aria-label="Default select example" required="">
                                     <option value="">- Escolha uma opção -</option>  
-                                    <option value="Administrator">Administrator</option>
-                                        <option value="Presidente">Presidente</option> 
-                                        <option value="Membro">Membro</option> 
-                                        <option value="Jurista">Jurista</option> 
-                                        <option value="Informatico">Informaático</option> 
-                                        <option value="Secretario">Secretário</option> 
-                                        <option value="Assistente">Assistente</option>  
+                                    @if($roles)
+                                        @foreach($roles as $role)
+                                        <option value="{{$role->name}}">{{$role->name}}</option>  
+                                        @endforeach
+                                    @endif
                                     </select>
                                     <div class="valid-feedback"></div>
                                     <div class="invalid-feedback">Campo obrigatório.</div>

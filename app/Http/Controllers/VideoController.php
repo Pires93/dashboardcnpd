@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Gate;
 use App\Models\Video;
 class VideoController extends Controller
 {
      
     public function index()
     {
-        $vide = Video::orderBy('created_at')->get();
-        return view('video.index')->with('vide',$vide);
+        if (Gate::allows('admin-manager')) {
+            $vide = Video::orderBy('created_at')->get();
+            return view('video.index')->with('vide',$vide);
+            
+        }else{
+            //abort(403);
+            return back()->with('alerta','Sem permisão!');
+        } 
     }
 
      

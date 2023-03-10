@@ -5,13 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Noticia;
+
+
+use Illuminate\Support\Facades\Gate;
 class NoticiaController extends Controller
 {
      
     public function index()
-    {
-         $news = Noticia::orderBy('created_at')->get();
-        return view('noticia.index')->with('news',$news);
+    {  
+        if (Gate::allows('admin-manager')) {
+            $news = Noticia::orderBy('id', 'DESC')->get();
+            return view('noticia.index')->with('news',$news);
+         }else{
+            //abort(403);
+            return back()->with('alerta','Sem permisão!');
+        } 
     }
  
 
@@ -40,9 +48,9 @@ class NoticiaController extends Controller
  
  
     public function show($id)
-    {
+    {  
         $news = Noticia::find($id);
-        return view('noticia.show')->with('news',$news);
+        return view('noticia.show')->with('news',$news); 
     } 
 
    

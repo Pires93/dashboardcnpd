@@ -13,6 +13,9 @@ use App\Http\Controllers\PublicacoesController;
 use App\Http\Controllers\VideoController; 
 use App\Http\Controllers\SidebarController;  
 use App\Http\Controllers\ConselhospraticoController;  
+use App\Http\Controllers\RoleController;  
+use App\Http\Controllers\PermissionController;  
+use App\Http\Controllers\RoleUserController;  
 
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +25,7 @@ Route::get('/', [HomeController::class,'login'])->middleware('auth');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+  
 //PEDIDO DE INFORMACAO ROUTES
 Route::resource("/pedidoInformacao",PedidoInformacaoController::class)->middleware('auth');
 Route::get('/pedidoInformacao/create', [PedidoInformacaoController::class, 'create'])->name('create');
@@ -32,13 +36,12 @@ Route::get('/pedidoInformacao/{id}', [PedidoInformacaoController::class, 'show']
 //USERS ROUTES
 Route::resource("/users",UserController::class)->middleware('auth');
 Route::post('/users', [UserController::class, 'store'])->name('index')->middleware('auth');
-Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('index')->middleware('auth');
+Route::get('/deleteu/{id}', [UserController::class, 'destroy'])->name('destroy')->middleware('auth');
 Route::get('/desativar/{id}', [UserController::class, 'desativar'])->name('index')->middleware('auth');
 Route::get('/ativar/{id}', [UserController::class, 'ativar'])->name('index')->middleware('auth');
 Route::get('/users/{profile}',[UserController::class, 'profile'])->name('users.profile');
 
-
-
+ 
 //CCTV ROUTES
 Route::resource("/videovigilancia",VideovigilanciaController::class)->middleware('auth');
 Route::get('/videovigilancia/{id}', [VideovigilanciaController::class, 'show'])->name('show')->middleware('auth');
@@ -104,19 +107,34 @@ Route::get('/habilitar/{id}', [SidebarController::class, 'habilitar'])->name('in
  
  //CONSELHOS PRATICOS ROUTES 
 Route::resource("/conselhopratico",ConselhospraticoController::class)->middleware('auth'); 
-Route::post('/noticia', [ConselhospraticoController::class, 'store'])->name('index')->middleware('auth');
+Route::post('/conselhopratico', [ConselhospraticoController::class, 'store'])->name('index')->middleware('auth');
 Route::get('/delete/{id}', [ConselhospraticoController::class, 'destroy'])->name('index')->middleware('auth');
 Route::get('/unpublish/{id}', [ConselhospraticoController::class, 'unpublish'])->name('index')->middleware('auth');
 Route::get('/publish/{id}', [ConselhospraticoController::class, 'publish'])->name('index')->middleware('auth');
  
+ //ROLES ROUTES 
+Route::resource("/roles",RoleController::class)->middleware('auth'); 
+Route::post('/roles', [RoleController::class, 'store'])->name('roles.store')->middleware('auth');
+Route::get('/delete/{id}', [RoleController::class, 'destroy'])->name('roles.destroy')->middleware('auth'); 
+ 
+ 
 
-
-
-
-
-
-
+ //PERMISSIONS ROUTES 
+ Route::resource("/permission",PermissionController::class)->middleware('auth'); 
+ Route::post('/permission', [PermissionController::class, 'store'])->name('permission.index')->middleware('auth');
+ Route::get('/delete/{id}', [PermissionController::class, 'destroy'])->name('permission.delete')->middleware('auth');
+ 
+  //PERMISSIONS de users 
+ Route::resource("/userpermissions",RoleUserController::class)->middleware('auth'); 
+ Route::post('/userpermissions', [RoleUserController::class, 'store'])->name('userpermissions.index')->middleware('auth');
+ Route::get('/delete/{id}', [PermissionController::class, 'destroy'])->name('userpermissions.delete')->middleware('auth');
+ 
+ 
 
 
  
+ /*
+Route::get('/users/{profile}',[UserController::class, 'profile'])->name('users.profile')
+->middleware('can:listar-users');*/
 
+  

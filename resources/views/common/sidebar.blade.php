@@ -66,20 +66,22 @@
         
         
         <!-- Divider -->
+        @can('admin-manager') 
+ 
         <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
+      
+         <!-- SOMENTE ADMIN -->
+         <div class="sidebar-heading">
             Administrator
         </div>
- 
-
-        <!-- Nav Item - Pages Collapse Menu -->
+        
+        <!-- GESTAO DE DASHBOARD -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Gestão de Site</span>
+                <span>Admin Manager</span>
+                
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded"> 
@@ -100,8 +102,36 @@
                 </div>
             </div>
         </li> 
- 
-        <hr class="sidebar-divider d-none d-md-block">
+
+                <!-- ACL LARAVEL -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Permissão ACL</span>
+                </a>
+                <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded"> 
+                <?php
+                $menus = Sidebar::where(['estado'=>'Ativo','type'=>'Gestao ACL'])->orderBy('titulo', 'ASC')->get();
+                foreach ($menus as $menu) 
+                    {
+                    ?> 
+                    
+                    
+                        <a class="collapse-item" href="{{ route("$menu->url") }}">
+                        <i class="{{ $menu->icon }}"></i> 
+                            {{ $menu->titulo }}
+                        </a>  
+                    <?php  
+                    } 
+                    ?> 
+                    </div>
+                </div>
+            </li>      
+            @endcan
+        <hr class="sidebar-divider d-none d-md-block"> 
+        
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>

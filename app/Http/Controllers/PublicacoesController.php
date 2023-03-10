@@ -3,6 +3,7 @@
 namespace App\Http\Controllers; 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Gate;
 use App\Models\Publicacoes;
 class PublicacoesController extends Controller
 {
@@ -13,8 +14,15 @@ class PublicacoesController extends Controller
      */
     public function index()
     {
-        $pubs = Publicacoes::orderBy('created_at')->get();
-        return view('publicacoes.index')->with('pubs',$pubs);
+
+        if (Gate::allows('admin-manager')) {
+            $pubs = Publicacoes::orderBy('created_at')->get();
+            return view('publicacoes.index')->with('pubs',$pubs);
+         }else{
+            //abort(403);
+            return back()->with('alerta','Sem permisão!');
+        }  
+        
     }
 
      
