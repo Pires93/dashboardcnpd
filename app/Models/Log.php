@@ -15,7 +15,8 @@ class Log extends Model
         'ip_address',
         'user_agent',
         'id_evento',
-        'tipo_evento'
+        'tipo_evento',
+        'nome_evento'
         
 
     ];

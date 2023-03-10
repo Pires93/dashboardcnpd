@@ -50,11 +50,13 @@ class NoticiaController extends Controller
         $log->user_id = auth()->user()->id;
         $log->user_name = auth()->user()->name;
         $log->id_evento = $news->id;
+        $log->nome_evento = $news->name;
         $log->action = 'Criar Noticia';
-        $log->tipo_evento = "Notícia";
+        $log->tipo_evento = "Noticia";
         $log->ip_address = $request->ip();
         $log->user_agent = $request->userAgent();
         $log->save();
+
 
         return redirect('/noticia')->with('message','Notícia publicada com sucesso!');
     }
@@ -93,8 +95,9 @@ class NoticiaController extends Controller
         $log->user_id = auth()->user()->id;
         $log->user_name = auth()->user()->name;
         $log->id_evento = $news->id;
-        $log->action = 'Noticia Alterado';
-        $log->tipo_evento = "Notícia";
+        $log->nome_evento = $news->name;
+        $log->action = 'Alterar Noticia';
+        $log->tipo_evento = "Noticia";
         $log->ip_address = $request->ip();
         $log->user_agent = $request->userAgent();
         $log->save();
@@ -103,9 +106,21 @@ class NoticiaController extends Controller
     }
 
     
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        Noticia::destroy($id);  
+         
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        $log->id_evento = $request->id;
+        $log->nome_evento = $request->titulo;
+        $log->action = 'Apagar Noticia';
+        $log->tipo_evento = "Notícia";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
+
+        Noticia::destroy($id); 
         return redirect('/noticia')->with('message','Notícia apagada com sucesso!');
     }
     

@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string(' user_name')->nullable();
             $table->string('ip_address')->nullable();
             $table->text('user_agent')->nullable();
-            $table->id('id_evento')->nullable();
-            $table->string('tipo_evento')->nullable();
+            $table->integer('id_evento')->nullable();
+            $table->string('tipo_evento')->nullable(); 
+            $table->text('nome_evento')->nullable(); 
             $table->timestamps();
         });
     }

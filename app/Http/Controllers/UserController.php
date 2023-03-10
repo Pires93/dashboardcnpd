@@ -21,6 +21,7 @@ class UserController extends Controller
             
             $users = User::all(); 
             $roles = Role::all();  
+
             return view('users.index')
             ->with('users',$users) 
             ->with('roles',$roles);
@@ -43,19 +44,7 @@ class UserController extends Controller
    
    }
 
-   /* protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'typeUser' => $data['typeUser'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }*/
-     public function create()
-    {
-       // return view('users.create');
-    }
+   
 
 
     public function store(Request $request)
@@ -82,6 +71,17 @@ class UserController extends Controller
         $ru->created_at=date('Y-m-d H:i:s');
         $ru->save();
 
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        $log->id_evento = $user->id;
+        $log->nome_evento = $user->name;
+        $log->action = 'Criar User';
+        $log->tipo_evento = "User";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
+
         return redirect('/users')->with('message','User registado com sucesso!');
     }
 
@@ -91,6 +91,7 @@ class UserController extends Controller
 
          $roles = Role::all(); 
          $user = User::find($id); 
+
          return view('users.profile')
              ->with('user',$user)
              ->with('roles',$roles);
@@ -115,32 +116,40 @@ class UserController extends Controller
             $nameBd=now().'.'.$request->foto->extension(); 
           $capaname = $request->foto->storeAs('users',$nameBd); 
           $user->foto=$nameBd;
-        }   
+        } 
+        $user->save(); 
+
         $log = new Log;
         $log->user_id = auth()->user()->id;
         $log->user_name = auth()->user()->name;
-        //$log->id_evento = $news->id;
+        $log->id_evento = $user->id;
+        $log->nome_evento = $user->name;
         $log->action = 'Atualizar User';
         $log->tipo_evento = "User";
         $log->ip_address = $request->ip();
         $log->user_agent = $request->userAgent();
         $log->save();
-        $user->save();
         return back()->with('message','User editado com sucesso!');
     }
 
      
     public function destroy(Request $request, $id)
     {
-        User::destroy($id);  
-        $log = new Log;
+       
+ 
+        $user = User::find($id);
+        $log = new Log; 
         $log->user_id = auth()->user()->id;
         $log->user_name = auth()->user()->name;
-        //$log->id_evento = $news->id;
-        $log->action = 'Eliminar User';
+        $log->id_evento = $request->id; 
+        $log->nome_evento = $user->name;
+        $log->action = 'Apagar User';
         $log->tipo_evento = "User";
         $log->ip_address = $request->ip();
         $log->user_agent = $request->userAgent();
+        $log->save();
+
+        User::destroy($id);  
 
         return redirect('/users')->with('message','User removido com sucesso!');
     }
@@ -149,22 +158,36 @@ class UserController extends Controller
     {
         $user = User::find( $id);
         $user->estado="Inativo";
+        $user->save();
+
         $log = new Log;
         $log->user_id = auth()->user()->id;
         $log->user_name = auth()->user()->name;
-        //$log->id_evento = $news->id;
+        $log->id_evento = $request->id; 
+        $log->nome_evento = $user->name;
         $log->action = 'Desativar User';  
         $log->tipo_evento = "User";
         $log->ip_address = $request->ip();
         $log->user_agent = $request->userAgent();
-        $user->save();
+        $log->save();
         return back()->with('message','User desativado com sucesso!');
     } 
-    public function ativar($id)
+    public function ativar(Request $request, $id)
     {
         $user = User::find($id);
         $user->estado="Ativo";
         $user->save();
+
+        $log = new Log;
+        $log->user_id = auth()->user()->id;
+        $log->user_name = auth()->user()->name;
+        $log->id_evento = $request->id;
+        $log->nome_evento = $user->name;
+        $log->action = 'Ativar User';  
+        $log->tipo_evento = "User";
+        $log->ip_address = $request->ip();
+        $log->user_agent = $request->userAgent();
+        $log->save();
         return back()->with('message','User ativado com sucesso!');
     } 
 }

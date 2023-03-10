@@ -255,4 +255,15 @@ Breadcrumbs::for('Ver Permissão', function (BreadcrumbTrail $trail, Role_User $
     $trail->parent('Permissões de Users', route('userpermissions.index'));
     $trail->push("Permissão ID - ".$upermission->id, route('show', $upermission));
 });
+
+// LISTA TODOS OS LOGS
+Breadcrumbs::for('Logs', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Logs', route('logssystem.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Ver Logs', function (BreadcrumbTrail $trail, Role_User $upermission) {
+    $trail->parent('Logs', route('logssystem.index'));
+    $trail->push("Log ID - ".$upermission->id, route('show', $upermission));
+});
 ?> 

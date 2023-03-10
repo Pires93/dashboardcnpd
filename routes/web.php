@@ -12,10 +12,12 @@ use App\Http\Controllers\LegislacaoController;
 use App\Http\Controllers\PublicacoesController; 
 use App\Http\Controllers\VideoController; 
 use App\Http\Controllers\SidebarController;  
-use App\Http\Controllers\ConselhospraticoController;  
+use App\Http\Controllers\ConselhospraticoController;
+use App\Http\Controllers\LogsController;
 use App\Http\Controllers\RoleController;  
 use App\Http\Controllers\PermissionController;  
 use App\Http\Controllers\RoleUserController;  
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -129,6 +131,9 @@ Route::get('/delete/{id}', [RoleController::class, 'destroy'])->name('roles.dest
  Route::post('/userpermissions', [RoleUserController::class, 'store'])->name('userpermissions.index')->middleware('auth');
  Route::get('/delete/{id}', [PermissionController::class, 'destroy'])->name('userpermissions.delete')->middleware('auth');
  
+  //LOGS ROUTES 
+  Route::resource("/logssystem",LogsController::class)->middleware('auth'); 
+  Route::post('/logssystem', [LogsController::class, 'store'])->name('logssystem.index')->middleware('auth');
  
 
 
