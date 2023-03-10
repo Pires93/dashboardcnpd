@@ -156,11 +156,10 @@ class InterconexaoController extends Controller
                 for ($i = 0; $i < $count; $i++) {
                     $finalidade = new Finalidadetratamento();
                     $finalidade->categorias_finalidade = $dataF['categoria'];
-                    $finalidade->idForm = $pedidos->id;
-                    $finalidade->created_at = date('Y-m-d H:i:s');
-
                     $finalidade->finalidades = $dataF['finalidade'];
                     $finalidade->tipoform = 'Interconexao';
+                    $finalidade->idForm = $pedidos->id;
+                    $finalidade->created_at = date('Y-m-d H:i:s'); 
                 }
                 $finalidade->save();
             }
@@ -174,6 +173,7 @@ class InterconexaoController extends Controller
                     $comunicacao = new Comunicacaoterceiro();
                     $comunicacao->entidades_comunicadas = $dataC['entidadesComunicadas'];
                     $comunicacao->condicoes_comunicacao = $dataC['condicoesComunicacao'];
+                    $comunicacao->dados_transferidos = ""; 
                     $comunicacao->idForm = $pedidos->id;
                     $comunicacao->tipoform = 'Interconexao';
                     $comunicacao->created_at = date('Y-m-d H:i:s');
@@ -192,7 +192,7 @@ class InterconexaoController extends Controller
                     $transferencia->entidades = $dataC['paisTransferido'];
                     $transferencia->pais = $dataC['paisTransferido'];
                     $transferencia->dados_transferidos = $dataC['dadosTransferidos'];
-                    $transferencia->fundamento = "" ;
+                    $transferencia->fundamento = "";
                     $transferencia->idForm = $pedidos->id;
                     $transferencia->tipoform = 'Interconexao';
                     $transferencia->created_at = date('Y-m-d H:i:s');

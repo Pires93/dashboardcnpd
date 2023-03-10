@@ -103,6 +103,7 @@ class Interconexao extends Model
         public function finalidade_tratament(){
             return $this->hasMany('App\Models\Finalidadetratamento');
         }
+        
 
         public function comunicacao_terceiros(){
             return $this->hasMany('App\Models\Comunicacaoterceiro');

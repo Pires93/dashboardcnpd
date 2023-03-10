@@ -15,6 +15,7 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\BiometriaController;
 use App\Http\Controllers\GeralController;
 use App\Http\Controllers\TicController;
+use App\Http\Controllers\ConselhospraticoController;  
  
 //API PARA ALIMENTAR SITE
 

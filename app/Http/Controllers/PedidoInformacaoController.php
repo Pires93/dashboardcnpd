@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\PedidoInformacao;
 use Illuminate\Database\DBAL\TimestampType;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Gate;
 
 class PedidoInformacaoController extends Controller
 {
 
     public function index()
     {
-        $pedidos = PedidoInformacao::all();
-        return view('pedidoInformacao.index')->with('pedidos',$pedidos);
+        if (Gate::allows('pedidos-informacao')) { 
+            $pedidos = PedidoInformacao::all();
+            return view('pedidoInformacao.index')->with('pedidos',$pedidos);
+        }else{
+            //abort(403);
+            return back()->with('alerta','Sem permisão!');
+        } 
     }
 
 
@@ -20,7 +26,7 @@ class PedidoInformacaoController extends Controller
     {
         return view('pedidoInformacao.create');
     }
-
+    
 
     public function store(Request $request)
     {

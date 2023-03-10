@@ -17,6 +17,13 @@ use App\Models\Video;
 use App\Models\Sidebar;
 use App\Models\user;
 use App\Models\Conselhospratico;
+use App\Models\Role_User;
+
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+
+
 
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
@@ -211,5 +218,41 @@ Breadcrumbs::for('Ver Conselho Prático', function (BreadcrumbTrail $trail, Cons
     $trail->parent('Conselhos Práticos', route('conselhopratico.index'));
     $trail->push("Conselho Prático ID - ".$consel->id, route('show', $consel));
 });
+
  
-?>
+/******************************************PERMISSION  ****************************************** */
+ // LISTA TODOS OS ROLES USERS 
+  Breadcrumbs::for('Permissions', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Permissions', route('permission.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Ver Permission', function (BreadcrumbTrail $trail, Permission $permission) {
+    $trail->parent('Permissions', route('permission.index'));
+    $trail->push("Permission ID - ".$permission->id, route('show', $permission));
+});
+
+ /******************************************VIDEOS****************************************** */
+// LISTA TODOS OS ROLESIDEBARS
+Breadcrumbs::for('Roles', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Roles', route('roles.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Ver Role', function (BreadcrumbTrail $trail, Role $role) {
+    $trail->parent('Roles', route('roles.index'));
+    $trail->push("Role ID - ".$role->id, route('show', $role));
+});
+
+
+// LISTA TODAS AS PERMISSOES DE UM USER
+Breadcrumbs::for('Permissões de Users', function ($trail) {
+    $trail->parent('Dashboard');
+    $trail->push('Permissões de Users', route('userpermissions.index'));
+});
+//MOSTRAR id
+Breadcrumbs::for('Ver Permissão', function (BreadcrumbTrail $trail, Role_User $upermission) {
+    $trail->parent('Permissões de Users', route('userpermissions.index'));
+    $trail->push("Permissão ID - ".$upermission->id, route('show', $upermission));
+});
+?> 

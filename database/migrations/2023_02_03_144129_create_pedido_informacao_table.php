@@ -25,8 +25,8 @@ return new class extends Migration
             $table->text('resposta')->nullable();
             $table->string('data_r')->nullable();
             $table->string('estado')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
         });
     }
 

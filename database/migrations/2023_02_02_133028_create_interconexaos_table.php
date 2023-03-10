@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('interconexaos', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
             $table->string('tipo_notificacao')->nullable();
             $table->string('tipo_pessoa')->nullable();
             $table->string('nome_denominacao')->nullable();

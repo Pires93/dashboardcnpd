@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('capa')->nullable();
             $table->string('estado')->nullable();
             $table->string('type')->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->string('created_at')->nullable();
+            $table->string('updated_at')->nullable();
         });
     }
 

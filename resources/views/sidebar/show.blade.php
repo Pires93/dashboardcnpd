@@ -198,7 +198,8 @@
                         <option value="">- Escolha uma opção -</option>  
                         <option value="Normal">Normal</option>
                             <option value="Formulario">Formulário</option>  
-                            <option value="Gestao">Gestão de Site</option>   
+                            <option value="Gestao">Admin Manager</option>  
+                            <option value="Gestao ACL">Permissão ACL</option>
                         </select>
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback">Campo obrigatório.</div>

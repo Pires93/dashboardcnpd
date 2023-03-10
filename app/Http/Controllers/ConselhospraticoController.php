@@ -6,13 +6,21 @@ use App\Models\Conselhospratico;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Gate;
+
 class ConselhospraticoController extends Controller
 {
     
     public function index()
     {
-         $consels = Conselhospratico::orderBy('created_at')->get();
-        return view('conselhopratico.index')->with('consels',$consels);
+        if (Gate::allows('admin-manager')) {
+            $consels = Conselhospratico::orderBy('created_at')->get();
+            return view('conselhopratico.index')->with('consels',$consels);
+         
+        }else{
+            //abort(403);
+            return back()->with('alerta','Sem permisão!');
+        } 
     }
  
 
